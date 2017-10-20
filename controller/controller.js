@@ -5,16 +5,16 @@ const log = require('logtools');
 module.exports = (app, io) => {
 	//Main Homepage
 	app.get('/', (req, res) => {
-		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+		res.sendFile(path.resolve(`${__dirname}/../cli/html/index.html`));
 	});
 
 	//Code Page
 	app.get('/code', (req, res) => {
-		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+		res.sendFile(path.resolve(`${__dirname}/../cli/html/index.html`));
 	});
 
 	//URL Hub
 	app.get('/hub', (req, res) => {
-		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+		res.sendFile(path.resolve(`${__dirname}/../cli/html/index.html`));
 	});
 }

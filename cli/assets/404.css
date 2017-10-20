@@ -1,0 +1,10 @@
+html {
+
+}
+
+div #msg {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	left: 50%;
+}

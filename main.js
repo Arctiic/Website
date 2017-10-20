@@ -8,7 +8,9 @@ const path = require('path');
 const config = require('./config.json');
 const morgan = require('morgan');
 
-app.use('s', express.static(`${__dirname}/public/`))
+app.use('/cli', express.static(`${__dirname}/cli/`));
+
+app.enable("case sensitive routing");
 
 require('./controller/logger.js')(app, io);
 require('./controller/controller.js')(app, io);

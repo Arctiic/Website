@@ -4,7 +4,7 @@ const log = require('logtools');
 module.exports = (app, io) => {
 	//404 Handling
 	app.use((req, res, next) => {
-		res.status(404).sendFile(path.resolve(`${__dirname}/../cli/404.html`));
+		res.status(404).sendFile(path.resolve(`${__dirname}/../cli/errors/404.html`));
 	});
 
 	//500 Handling
