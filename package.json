@@ -1,0 +1,23 @@
+{
+	"name": "SpysWebsite",
+	"author": "TheAssassinSpy",
+	"description": "A Website!",
+	"main": "main.js",
+	"version": "1.0.0",
+	"requires": "true",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon --delay 5000ms",
+		"test": ""
+	},
+	"dependencies": {
+		"angular": "^1.6.6",
+		"express": "^4.16.2",
+		"ip": "^1.1.5",
+		"logtools": "^2.1.0",
+		"morgan": "^1.9.0",
+		"nodemon": "^1.12.1",
+		"socket.io": "^2.0.3",
+		"terminal-kit": "^1.13.13"
+	}
+}

@@ -1,0 +1,20 @@
+const path = require('path');
+const express = require('express');
+const log = require('logtools');
+
+module.exports = (app, io) => {
+	//Main Homepage
+	app.get('/', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+	});
+
+	//Code Page
+	app.get('/code', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+	});
+
+	//URL Hub
+	app.get('/hub', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/index.html`));
+	});
+}
