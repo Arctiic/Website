@@ -17,4 +17,9 @@ module.exports = (app, io) => {
 	app.get('/hub', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/index.html`));
 	});
+
+	//Manual Error Handling
+	app.get('/err/:id', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/errors/${req.params.id || "404"}.html`));
+	})
 }
