@@ -1,10 +1,20 @@
 html {
-
+	font-family: sans-serif;
 }
 
-div #msg {
+h1 {
+	text-align: center;
+}
+
+img {
+	width: 40%;
+	height: 40%;
+}
+
+div {
 	position: absolute;
 	width: 50%;
 	height: 100%;
+	top: 50%;
 	left: 50%;
 }
