@@ -1,8 +1,6 @@
 const path = require('path');
 const express = require('express');
 const log = require('logtools');
-const react = require('react');
-const reactDOM = require('react-dom');
 
 module.exports = (app, io) => {
 	//Main Homepage
