@@ -1,3 +1,4 @@
+const is = require('is_js');
 module.exports = (req) => {
   if (req.headers) {
     if (is.ip(req.headers['x-client-ip'])) {
