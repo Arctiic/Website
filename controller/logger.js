@@ -10,7 +10,7 @@ module.exports = (app, io, t) => {
 				`${req.originalUrl}` || '',
 				`${res.statusCode}  ` || '',
 				" Latency ",
-				`${req.connection.remoteAddress}` || ''
+				`${req.ip}` || ''
 			)
 		);
 		console.log(log);
