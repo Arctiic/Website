@@ -1,7 +1,7 @@
 const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
-const ip = require('ipware')().get_ip();
+const ip = require('../modules/ip.js');
 
 module.exports = (app, io, t) => {
 	app.use((req, res, next) => {
@@ -11,7 +11,7 @@ module.exports = (app, io, t) => {
 				`${req.originalUrl}` || '',
 				`${res.statusCode}  ` || '',
 				" Latency ",
-				ip(req) || ''
+				ip(req).clientIp || ''
 			)
 		);
 		console.log(log);
