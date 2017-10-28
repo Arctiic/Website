@@ -6,12 +6,12 @@ module.exports = (app, io, t) => {
 	app.use((req, res, next) => {
 		let log = t.newLine(
 			new st.Line(
-				req.method || '',
-				req.originalUrl || '',
-				req.statusCode || '',
-				res.statusCode || '',
+				`${req.method}` || '',
+				`${req.originalUrl}` || '',
+				`${req.statusCode}  ` || '',
+				`${res.statusCode}  ` || '',
 				" Latency ",
-				req.connection.remoteAddress || ''
+				`${req.connection.remoteAddress}` || ''
 			)
 		);
 		console.log(log);
