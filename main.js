@@ -14,8 +14,8 @@ app.use('/cli', express.static(`${__dirname}/cli/`));
 
 app.enable("case sensitive routing");
 
-require('./controller/logger.js')(app, io);
-require('./controller/controller.js')(app, io, t);
+require('./controller/logger.js')(app, io, t);
+require('./controller/controller.js')(app, io);
 require('./controller/errors.js')(app, io);
 
 http.listen(config.port, () => {
