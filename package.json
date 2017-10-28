@@ -15,7 +15,7 @@
 		"express": "^4.16.2",
 		"ip": "^1.1.5",
 		"logtools": "^2.1.0",
-		"stringtables": "^1.0.0",
+		"stringtables": "^1.0.1",
 		"nodemon": "^1.12.1",
 		"socket.io": "^2.0.3",
 		"terminal-kit": "^1.13.13"
