@@ -10,7 +10,7 @@ module.exports = (app, io, t) => {
 				`${req.originalUrl}` || '',
 				`${res.statusCode}  ` || '',
 				" Latency ",
-				`${req.ip}` || ''
+				request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
 			)
 		);
 		console.log(log);
