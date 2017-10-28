@@ -1,4 +1,4 @@
-modules.exports = (req) => {
+module.exports = (req) => {
   if (req.headers) {
     if (is.ip(req.headers['x-client-ip'])) {
       return req.headers['x-client-ip'];
