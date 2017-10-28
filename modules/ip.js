@@ -1,4 +1,27 @@
 const is = require('is_js');
+
+getClientIpFromXForwardedFor = (value) => {
+  if (!is.existy(value)) {
+    return null;
+  }
+
+  if (is.not.string(value)) {
+    throw new TypeError(`Expected a string, got "${typeof value}"`);
+  }
+
+  const forwardedIps = value.split(',').map((e) => {
+    const ip = e.trim();
+    if (ip.includes(':')) {
+      const splitted = ip.split(':');
+      if (splitted.length === 2) {
+        return splitted[0];
+      }
+    }
+  	return ip;
+  });
+  return forwardedIps.find(is.ip);
+}
+
 module.exports = (req) => {
   if (req.headers) {
     if (is.ip(req.headers['x-client-ip'])) {
