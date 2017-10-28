@@ -1,15 +1,10 @@
 const path = require('path');
-const morgan = require('morgan');
 const log = require('logtools');
+const st = require('stringtables');
 
-module.exports = (app, io) => {
-	app.use(morgan((tokens, req, res) => {
-		return [
-	    tokens.method(req, res),
-	    tokens.url(req, res),
-	    tokens.status(req, res),
-	    tokens.res(req, res, 'content-length'), '-',
-	    tokens['response-time'](req, res), 'ms'
-	  ].join(' ')
-	}));
+module.exports = (app, io, t) => {
+	app.use((req, res, next) => {
+		let log = t.newLine(req.method || '', req.originalUrl || '', req.statusCode || '', res.statusCode || '', " Latency ", req.connection.remoteAddress || '');
+		console.log(log);
+	});
 }
