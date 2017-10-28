@@ -18,6 +18,7 @@
 		"stringtables": "^1.0.1",
 		"nodemon": "^1.12.1",
 		"socket.io": "^2.0.3",
-		"terminal-kit": "^1.13.13"
+		"terminal-kit": "^1.13.13",
+		"ipware": "^1.0.0"
 	}
 }

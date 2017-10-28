@@ -1,6 +1,7 @@
 const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
+const ip = require('ipware')().get_ip();
 
 module.exports = (app, io, t) => {
 	app.use((req, res, next) => {
@@ -10,7 +11,7 @@ module.exports = (app, io, t) => {
 				`${req.originalUrl}` || '',
 				`${res.statusCode}  ` || '',
 				" Latency ",
-				req.headers['x-forwarded-for'] || req.connection.remoteAddress || ''
+				ip(req) || ''
 			)
 		);
 		console.log(log);
