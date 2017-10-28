@@ -8,7 +8,6 @@ module.exports = (app, io, t) => {
 			new st.Line(
 				`${req.method}` || '',
 				`${req.originalUrl}` || '',
-				`${req.statusCode}  ` || '',
 				`${res.statusCode}  ` || '',
 				" Latency ",
 				`${req.connection.remoteAddress}` || ''

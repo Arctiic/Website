@@ -8,7 +8,7 @@ const path = require('path');
 const config = require('./config.json');
 const st = require('stringtables');
 
-const t = new st.Table(" Type ", " Path           ", " Req ", " Res ", " Latency ", " IP                 ");
+const t = new st.Table(" Type ", " Path           ", " Res ", " Latency ", " IP                 ");
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
 
