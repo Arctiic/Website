@@ -12,8 +12,8 @@ const t = new st.Table(" Type ", " Path               ", " Res ", " Latency ", "
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
 
-app.enable("case sensitive routing");
-app.set('trust proxy', 'loopback');
+app.enable('case sensitive routing');
+app.enable('trust proxy');
 
 require('./controller/logger.js')(app, io, t);
 require('./controller/controller.js')(app, io);
