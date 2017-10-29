@@ -3,7 +3,7 @@ const log = require('logtools');
 const st = require('stringtables');
 
 module.exports = (app, io, t) => {
-	app.use((req, res, next) => {
+	app.all('*', (req, res, next) => {
 		let ip =
 			req.headers['x-real-ip'] ||
 			req.connection.remoteAddress;

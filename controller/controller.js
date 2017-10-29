@@ -13,6 +13,11 @@ module.exports = (app, io) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/code.html`));
 	});
 
+	//IP Page
+	app.get('/ip', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/html/ip.html`));
+	});
+
 	//URL Hub
 	app.get('/hub', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/hub.html`));
