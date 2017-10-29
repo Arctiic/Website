@@ -7,13 +7,17 @@ module.exports = (app, io, t) => {
 		let ip =
 			req.headers['x-real-ip'] ||
 			req.connection.remoteAddress;
+		let port =
+			req.headers['x-forwarded-port'] ||
+			req.connection.remotePort;
 		let log = t.newLine(
 			new st.Line(
 				`${req.method}`,
 				`${req.originalUrl}`,
 				`${res.statusCode}  `,
 				" Latency ",
-				`${ip}`
+				`${ip}`,
+				`${port}`
 			)
 		);
 		console.log(log);
