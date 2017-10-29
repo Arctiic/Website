@@ -1,7 +1,6 @@
 const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
-const ip = require('../modules/ip.js');
 
 module.exports = (app, io, t) => {
 	app.use((req, res, next) => {
