@@ -11,16 +11,25 @@ module.exports = (app, io, t) => {
 		let port =
 			req.headers['x-forwarded-port'] ||
 			req.connection.remotePort;
-		morgan(function (tokens, req, res) {
-			return new st.Line (
-				`${tokens.method(req, res)}`,
-				`${tokens.url(req, res)}`,
-				`${tokens.status(req, res)}`,
-				`${tokens['response-time'](req, res)}`,
+		let status = headersSent(res)
+    	? String(res.statusCode)
+    	: undefined
+		let log = t.newLine(
+			new st.Line(
+				`${req.method}`,
+				`${req.originalUrl}`,
+				`${status}  `,
+				"0 ms",
 				`${ip}`,
 				`${port}`
 			)
-		});
+		);
 		next();
 	});
+}
+
+headersSent = (res) => {
+  return typeof res.headersSent !== 'boolean'
+    ? Boolean(res._header)
+    : res.headersSent
 }
