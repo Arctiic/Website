@@ -1,6 +1,7 @@
 const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
+const morgan = require('morgan');
 
 module.exports = (app, io, t) => {
 	app.all('*', (req, res, next) => {
@@ -10,17 +11,16 @@ module.exports = (app, io, t) => {
 		let port =
 			req.headers['x-forwarded-port'] ||
 			req.connection.remotePort;
-		let log = t.newLine(
-			new st.Line(
-				`${req.method}`,
-				`${req.originalUrl}`,
-				`${res.statusCode}  `,
-				" Latency ",
+		morgan(function (tokens, req, res) {
+			return new st.Line (
+				`${tokens.method(req, res)}`,
+				`${tokens.url(req, res)}`,
+				`${tokens.status(req, res)}`,
+				`${tokens['response-time'](req, res)}`,
 				`${ip}`,
 				`${port}`
 			)
-		);
-		console.log(log);
+		});
 		next();
 	});
 }
