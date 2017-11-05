@@ -18,6 +18,7 @@ app.enable('trust proxy');
 require('./controller/logger.js')(app, io, t);
 require('./controller/controller.js')(app, io);
 require('./controller/errors.js')(app, io);
+require('./controller/safteynet.js')(app, io);
 
 http.listen(config.port, () => {
     log.info(`Ready! http://${ip.address()}:${config.port}`);
