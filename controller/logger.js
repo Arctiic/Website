@@ -22,7 +22,7 @@ module.exports = (app, io, t) => {
 			new st.Line(
 				`${method}`,
 				`${path}`,
-				`${status}  `,
+				`${status}`,
 				"0 ms",
 				`${ip}`,
 				`${port}`
