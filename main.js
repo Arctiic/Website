@@ -9,16 +9,21 @@ const config = require('./config.json');
 const st = require('stringtables');
 
 const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ");
+const controllers = [
+	'logger',
+	'controller',
+	'errors',
+	'safteynet'
+];
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
 
 app.enable('case sensitive routing');
 app.enable('trust proxy');
 
-require('./controller/logger.js')(app, io, t);
-require('./controller/controller.js')(app, io);
-require('./controller/errors.js')(app, io);
-require('./controller/safteynet.js')(app, io);
+for (let i = 0; i < controllers.length; i++) {
+	require(`./controller/${controllers[i]}.js`)(app, io, t);
+}
 
 http.listen(config.port, () => {
     log.info(`Ready! http://${ip.address()}:${config.port}`);
