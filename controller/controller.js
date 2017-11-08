@@ -75,7 +75,7 @@ module.exports = (app, io) => {
 
 					<!-- Trick to center embed -->
 					<p style="text-align:center;">
-						<embed src="${req.params.page}.jpeg" width="768" height="448">
+						<embed src="/cli/assets/portal/${req.params.page}.jpeg" width="768" height="448">
 					</p>
 
 					<div class="btn-group mr-2" role="group" aria-label="First group">
