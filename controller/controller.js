@@ -38,7 +38,7 @@ module.exports = (app, io) => {
 	//Portal
 	app.get('/portal', (req, res) => {
 		res.set('Content-Type', 'text/html');
-		res.send(new Buffer(`<!DOCTYPE html><html><head><script></script></head><body></body></html>`));
+		res.send(new Buffer(`<!DOCTYPE html><html><head></head><body onload="window.location.href='/portal/1';"></body></html>`));
 	});
 	app.get('/portal/:page', (req, res) => {
 		res.set('Content-Type', 'text/html');
