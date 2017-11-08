@@ -79,7 +79,7 @@ module.exports = (app, io) => {
 					</p>
 
 					<div class="btn-group mr-2" role="group" aria-label="First group">
-				    <button type="button" class="btn btn-secondary" onclick="window.location.href = '/portal/' + last;">Back</button>
+				    <button type="button" class="btn btn-secondary" onclick="if (last > 1) { window.location.href = '/portal/' + last; }">Back</button>
 				    <button type="button" class="btn btn-secondary" onclick="page()">Enter Page #</button>
 				    <button type="button" class="btn btn-secondary" onclick="window.location.href = '/portal/' + next;">Next</button>
 			  	</div>
