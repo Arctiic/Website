@@ -41,6 +41,10 @@ module.exports = (app, io) => {
 		res.send(new Buffer(`<!DOCTYPE html><html><head></head><body onload="window.location.href='/portal/1';"></body></html>`));
 	});
 	app.get('/portal/:page', (req, res) => {
+		let pageNum = req.params.page;
+		let json = require(`../cli/assets/portal/${pageNum}.json`);
+		let text = json.text;
+		let command = json.command;
 		res.set('Content-Type', 'text/html');
 		res.send(new Buffer(`
 			<!DOCTYPE html>
@@ -49,9 +53,9 @@ module.exports = (app, io) => {
 					<title>Spy's Website</title>
 
 					<script>
-						let page = parseInt(${req.params.page});
-						let next = page + 1;
-						let last = page - 1;
+						let page = parseInt(${pageNum});
+						let text = ${text};
+						let command = ${command};
 
 						console.log("Page: " + page + " Next: " + next + " Last: " + last);
 					</script>
@@ -70,19 +74,17 @@ module.exports = (app, io) => {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
 					}, 25)"></iframe>
 					<h4><br /></h4>
-					<h1><strong>The Portal Keeper</strong></h1>
-					<h3>- Webcomic -</h3>
 
 					<!-- Trick to center embed -->
 					<p style="text-align:center;">
-						<embed src="/cli/assets/portal/${req.params.page}.jpeg" width="768" height="448">
+						<embed src="/cli/assets/portal/img/${req.params.page}.jpeg" width="768" height="448">
 					</p>
 
-					<div class="btn-group mr-2" role="group" aria-label="First group">
-				    <button type="button" class="btn btn-secondary" onclick="if (last > 1) { window.location.href = '/portal/' + last; }">Back</button>
-				    <button type="button" class="btn btn-secondary" onclick="page()">Enter Page #</button>
-				    <button type="button" class="btn btn-secondary" onclick="window.location.href = '/portal/' + next;">Next</button>
-			  	</div>
+					<div class="homebrew">
+						<a href="/portal/${pageNum + 1}">
+							<span style="text-align:center;" onclick="hide(); return false">>${command}</span>
+						</a>
+					</div>
 				</body>
 			</html>
 		`));
