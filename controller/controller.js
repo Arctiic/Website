@@ -52,9 +52,7 @@ module.exports = (app, io) => {
 		try {
 			json = require(`../cli/assets/portal/${pageNum}.json`);
 			jsonNext = require(`../cli/assets/portal/${pageNum + 1}.json`);
-		} catch (e) {
-			console.error(e);
-		};
+		} catch (e) {};
 		let title = json.title;
 		let text = json.text;
 		let command = jsonNext.title;
