@@ -87,10 +87,12 @@ module.exports = (app, io) => {
 
 					<p>${text}</p>
 
-					<div class="homebrew">
-						<a href="/portal/${pageNum + 1}">
-							<span style="text-align:center;" onclick="hide(); return false">>${command}</span>
-						</a>
+					<div class="mac">
+						<div class="homebrew">
+							<a href="/portal/${pageNum + 1}">
+								<span style="text-align:center;" onclick="hide(); return false">>${command}</span>
+							</a>
+						</div>
 					</div>
 				</body>
 			</html>
