@@ -43,16 +43,21 @@ module.exports = (app, io) => {
 	app.get('/portal/:page', (req, res) => {
 		let pageNum = parseInt(req.params.page);
 		let json = {
-			"title": "Oh crap. The Future isn't Here!?!?",
-			"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!",
-			"command": "Workin' on it!"
+			"title": "Uh-oh...",
+			"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!"
 		};
+		let jsonNext = {
+		 	"title": "Unfinished"
+		}
 		try {
 			json = require(`../cli/assets/portal/${pageNum}.json`);
-		} catch (e) {};
+			jsonNext = require(`../cli/assets/portal/${pageNum + 1}.json`);
+		} catch (e) {
+			console.error(e);
+		};
 		let title = json.title;
 		let text = json.text;
-		let command = json.command;
+		let command = jsonNext.title;
 		res.set('Content-Type', 'text/html');
 		res.send(new Buffer(`
 			<!DOCTYPE html>
