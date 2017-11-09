@@ -41,8 +41,16 @@ module.exports = (app, io) => {
 		res.send(new Buffer(`<!DOCTYPE html><html><head></head><body onload="window.location.href='/portal/1';"></body></html>`));
 	});
 	app.get('/portal/:page', (req, res) => {
-		let pageNum = req.params.page;
-		let json = require(`../cli/assets/portal/${pageNum}.json`);
+		let pageNum = parseInt(req.params.page);
+		let json = {
+			"title": "Oh crap. The Future isn't Here!?!?",
+			"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!",
+			"command": "Workin' on it!"
+		};
+		try {
+			json = require(`../cli/assets/portal/${pageNum}.json`);
+		} catch (e) {};
+		let title = json.title;
 		let text = json.text;
 		let command = json.command;
 		res.set('Content-Type', 'text/html');
@@ -51,14 +59,6 @@ module.exports = (app, io) => {
 			<html>
 				<head>
 					<title>Spy's Website</title>
-
-					<script>
-						let page = parseInt(${pageNum});
-						let text = ${text};
-						let command = ${command};
-
-						console.log("Page: " + page + " Next: " + next + " Last: " + last);
-					</script>
 					<script src="/cli/assets/js/main.js"></script>
 					<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
@@ -75,10 +75,14 @@ module.exports = (app, io) => {
 					}, 25)"></iframe>
 					<h4><br /></h4>
 
+					<h2>${title}</h2>
+
 					<!-- Trick to center embed -->
 					<p style="text-align:center;">
 						<embed src="/cli/assets/portal/img/${req.params.page}.jpeg" width="768" height="448">
 					</p>
+
+					<p>${text}</p>
 
 					<div class="homebrew">
 						<a href="/portal/${pageNum + 1}">

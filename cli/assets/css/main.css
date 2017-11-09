@@ -16,23 +16,27 @@ html {
 .portal .homebrew a:link {
 	background-color: black;
 	color: #40FF50;
-	text-decoration-color: #40FF50;
+	text-decoration: none;
+	font-size: 20px;
 }
 
 .portal .homebrew a:hover {
 	background-color: black;
 	color: #40FF50;
-	text-decoration-color: #40FF50;
+	text-decoration: none;
+	font-size: 20px;
 }
 
 .portal .homebrew a:visited {
 	background-color: black;
 	color: #40FF50;
-	text-decoration-color: #40FF50;
+	text-decoration: none;
+	font-size: 20px;
 }
 
 .portal .homebrew a:active {
 	background-color: black;
 	color: #40FF50;
-	text-decoration-color: #40FF50;
+	text-decoration: none;
+	font-size: 20px;
 }

@@ -12,8 +12,7 @@ const t = new st.Table(" Type ", " Path                               ", " Statu
 const controllers = [
 	'logger',
 	'controller',
-	'errors',
-	'safteynet'
+	'errors'
 ];
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
