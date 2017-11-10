@@ -92,7 +92,12 @@ module.exports = (app, io) => {
 					<link rel="icon" href="/cli/assets/img/spy.png" />
 
 				</head>
-				<body onload="load(); start();" class="portal">
+				<body onload="load(); start();
+					$('#app-bar').css('width', '500px');
+					$('#homebrew').css('width', '500px');
+					$('#app-bar').css('height', '20px');
+					$('#homebrew').css('height', '100px');
+				" class="portal">
 					<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
 					}, 25)"></iframe>
@@ -112,7 +117,20 @@ module.exports = (app, io) => {
 						<div class="app-bar" id="app-bar">
 							<div  id="close"style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'"></div>
 							<div id="minimize" style="background-color: #fdbe42;" class="icon" onclick="$('#terminal').hide();"></div>
-							<div id="fullscreen" style="background-color: #35c649;" class="icon" onclick=" if (fs) { $('#info').show(); } else { $('#info').hide(); } fs = !fs; "></div>
+							<div id="fullscreen" style="background-color: #35c649;" class="icon" onclick="
+								if (fs) {
+									$('#app-bar').css('width', '500px');
+									$('#homebrew').css('width', '500px');
+									$('#homebrew').css('height', '100px');
+									$('#info').show();
+								} else {
+									$('#app-bar').css('width', $(window).width() + 'px');
+									$('#homebrew').css('width', $(window).width() + 'px');
+									$('#homebrew').css('height', $(window).height() + 'px');
+									$('#info').hide();
+								}
+								fs = !fs;
+							"></div>
 							<span class="title" style="text-align: center;">Terminal - $bash</span>
 						</div>
 						<div class="homebrew" id="homebrew">
