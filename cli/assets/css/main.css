@@ -18,6 +18,11 @@ html {
 	color: #40FF50;
 	text-decoration: none;
 	font-size: 20px;
+	width: 500px;
+	height: 100px;
+	top:10px;
+	border-radius: 10px;
+	margin: 0 auto;
 }
 
 .portal .homebrew a:hover {
@@ -25,6 +30,11 @@ html {
 	color: #40FF50;
 	text-decoration: none;
 	font-size: 20px;
+	width: 500px;
+	height: 100px;
+	top:10px;
+	border-radius: 10px;
+	margin: 0 auto;
 }
 
 .portal .homebrew a:visited {
@@ -32,6 +42,11 @@ html {
 	color: #40FF50;
 	text-decoration: none;
 	font-size: 20px;
+	width: 500px;
+	height: 100px;
+	top:10px;
+	border-radius: 10px;
+	margin: 0 auto;
 }
 
 .portal .homebrew a:active {
@@ -39,14 +54,45 @@ html {
 	color: #40FF50;
 	text-decoration: none;
 	font-size: 20px;
+	width: 500px;
+	height: 100px;
+	top:10px;
+	border-radius: 10px;
+	margin: 0 auto;
 }
 
 .homebrew {
-	width:7cm;
-	height:2cm;
+	background-color: black;
+	color: #40FF50;
+	text-decoration: none;
+	font-size: 20px;
+	width: 500px;
+	height: 100px;
+	top: 10px;
+	border-radius: 10px;
+	margin: 0 auto;
 }
 
 .mac{
-	width: 7cm;
-	height: 5px;
+	left: 50cm;
+	background-color: grey;
+	width: 500px;
+	height: 20px;
+	margin: 0 auto;
+	border-radius: 10px;
+}
+
+.closebutton{
+	background-color: #ff0000;
+	margin-left: 10px;
+	margin-top: 4px;
+	float: left;
+	width:12px;
+	height:12px;
+	border-radius: 6px;
+}
+/*henry's trick to spacing*/
+h1{
+	font-size:30px;
+	color:#000000;
 }
