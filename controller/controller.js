@@ -88,9 +88,10 @@ module.exports = (app, io) => {
 					<p>${text}</p>
 
 					<div class="mac">
-						<div class="mac-button close"> <h1>x</h1> </div>
-						<div class="mac-button minimize"> <h3>-</h3> </div>
-						<div class="mac-button fullscreen"></div>
+						<div class="button close"></div>
+						<div class="button minimize"></div>
+						<div class="button fullscreen"></div>
+						<span class="title" style="text-align: center;">Terminal - $bash</span>
 					</div>
 					<div class="homebrew">
 					<h1 style="font-size:30px; color:#000000;">.</h1>

@@ -1,7 +1,6 @@
 const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
-const morgan = require('morgan');
 
 module.exports = (app, io, t) => {
 	app.all('*', (req, res, next) => {

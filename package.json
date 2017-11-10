@@ -7,7 +7,7 @@
 	"requires": "true",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon --delay 5000ms",
+		"start": "cd cli/assets/css && lessc --clean-css=\"--s1 --compatibility=ie8\" main.less main.css && cd ../../../ && nodemon --delay 5000ms",
 		"test": ""
 	},
 	"dependencies": {
@@ -15,6 +15,8 @@
 		"express": "^4.16.2",
 		"ip": "^1.1.5",
 		"is_js": "^0.9.0",
+		"less": "^2.7.3",
+		"less-plugin-clean-css": "^1.5.1",
 		"logtools": "^2.1.0",
 		"mysql": "^2.15.0",
 		"nodemon": "^1.12.1",
