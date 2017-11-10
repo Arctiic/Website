@@ -1,6 +1,15 @@
 html {
 	font-family: sans-serif;
 }
+
+h1{
+	font-size:12px;
+}
+
+h3{
+	font-size:14px;
+}
+
 .home {
 	text-align: center;
 }
@@ -83,7 +92,7 @@ html {
 }
 
 .mac-button {
-	margin-left: 10px;
+	margin-left: 5px;
 	margin-top: 4px;
 	float: left;
 	width:12px;
@@ -93,6 +102,7 @@ html {
 
 .close {
 	background-color: #ff0000;
+	margin-left: 10px;
 }
 
 .minimize {

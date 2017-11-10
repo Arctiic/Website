@@ -88,8 +88,8 @@ module.exports = (app, io) => {
 					<p>${text}</p>
 
 					<div class="mac">
-						<div class="mac-button close"></div>
-						<div class="mac-button minimize"></div>
+						<div class="mac-button close"> <h1>x</h1> </div>
+						<div class="mac-button minimize"> <h3>-</h3> </div>
 						<div class="mac-button fullscreen"></div>
 					</div>
 					<div class="homebrew">
