@@ -87,10 +87,10 @@ module.exports = (app, io) => {
 
 					<p>${text}</p>
 
-					<div class="mac">
-						<div class="button close"></div>
-						<div class="button minimize"></div>
-						<div class="button fullscreen"></div>
+					<div class="app-bar">
+						<div style="background-color: #ff0000;" class="icon"></div>
+						<div style="background-color: #fdbe42;" class="icon"></div>
+						<div style="background-color: #35c649;" class="icon"></div>
 						<span class="title" style="text-align: center;">Terminal - $bash</span>
 					</div>
 					<div class="homebrew">
