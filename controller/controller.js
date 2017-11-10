@@ -70,7 +70,7 @@ module.exports = (app, io) => {
 					<script>
 					function typeWriter(text, n) {
 						if (n < (text.length)) {
-							$('#command').html(text.substring(0, n+1));
+							$('#command').html(text.substring(0, n+1) + '▌');
 							n++;
 							setTimeout(function() {
 								typeWriter(text, n)
@@ -113,9 +113,9 @@ module.exports = (app, io) => {
 						<span class="title" style="text-align: center;">Terminal - $bash</span>
 					</div>
 					<div class="homebrew">
-					<h1 style="font-size:20px; color:#000000;">.</h1>
+					<h1 style="font-size:30px; color:#000000;">.</h1>
 						<a href="/portal/${pageNum + 1}">
-							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}▌">></span>
+							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
 						</a>
 					</div>
 				</body>
