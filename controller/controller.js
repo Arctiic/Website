@@ -88,11 +88,12 @@ module.exports = (app, io) => {
 					<p>${text}</p>
 
 					<div class="mac">
-						<div class="closebutton">
-						</div>
+						<div class="mac-button close"></div>
+						<div class="mac-button minimize"></div>
+						<div class="mac-button fullscreen"></div>
 					</div>
 					<div class="homebrew">
-					<h1>.</h1>
+					<h1 style="font-size:30px; color:#000000;">.</h1>
 						<a href="/portal/${pageNum + 1}">
 							<span style="text-align:center; top:50px;" onclick="hide(); return false">>${command}</span>
 						</a>

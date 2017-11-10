@@ -73,7 +73,7 @@ html {
 	margin: 0 auto;
 }
 
-.portal .mac {
+.mac {
 	left: 50cm;
 	background-color: grey;
 	width: 500px;
@@ -82,8 +82,7 @@ html {
 	border-radius: 10px;
 }
 
-.portal .closebutton {
-	background-color: #ff0000;
+.mac-button {
 	margin-left: 10px;
 	margin-top: 4px;
 	float: left;
@@ -91,8 +90,15 @@ html {
 	height:12px;
 	border-radius: 6px;
 }
-/*henry's trick to spacing*/
-.portal h1 {
-	font-size:30px;
-	color:#000000;
+
+.close {
+	background-color: #ff0000;
+}
+
+.minimize {
+	background-color: #fdbe42;
+}
+
+.fullscreen {
+	background-color: #35c649;
 }
