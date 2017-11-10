@@ -74,7 +74,7 @@ module.exports = (app, io) => {
 							n++;
 							setTimeout(function() {
 								typeWriter(text, n)
-							}, 100);
+							}, 200);
 						}
 					}
 
