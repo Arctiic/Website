@@ -68,6 +68,7 @@ module.exports = (app, io) => {
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
 					<script>
+					let fs = false;
 					function typeWriter(text, n) {
 						if (n < (text.length)) {
 							$('#command').html(text.substring(0, n+1) + '▌');
@@ -95,28 +96,31 @@ module.exports = (app, io) => {
 					<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
 					}, 25)"></iframe>
-					<h4><br /></h4>
+					<div id="info">
+						<h4><br /></h4>
 
-					<h2>${title}</h2>
+						<h2>${title}</h2>
 
-					<!-- Trick to center embed -->
-					<p style="text-align:center;">
-						<embed src="/cli/assets/portal/img/${req.params.page}.jpeg" width="768" height="448">
-					</p>
+						<!-- Trick to center embed -->
+						<p style="text-align:center;">
+							<embed src="/cli/assets/portal/img/${req.params.page}.jpeg" width="768" height="448">
+						</p>
 
-					<p>${text}</p>
-
-					<div class="app-bar">
-						<div style="background-color: #ff0000;" class="icon"></div>
-						<div style="background-color: #fdbe42;" class="icon"></div>
-						<div style="background-color: #35c649;" class="icon"></div>
-						<span class="title" style="text-align: center;">Terminal - $bash</span>
+						<p>${text}</p>
 					</div>
-					<div class="homebrew">
-					<h1 style="font-size:30px; color:#000000;">.</h1>
-						<a href="/portal/${pageNum + 1}">
-							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
-						</a>
+					<div id="terminal">
+						<div class="app-bar" id="app-bar">
+							<div  id="close"style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'"></div>
+							<div id="minimize" style="background-color: #fdbe42;" class="icon" onclick="$('#terminal').hide();"></div>
+							<div id="fullscreen" style="background-color: #35c649;" class="icon" onclick=" if (fs) { $('#info').show(); } else { $('#info').hide(); } fs = !fs; "></div>
+							<span class="title" style="text-align: center;">Terminal - $bash</span>
+						</div>
+						<div class="homebrew" id="homebrew">
+						<h1 style="font-size:30px; color:#000000;">.</h1>
+							<a href="/portal/${pageNum + 1}">
+								<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
+							</a>
+						</div>
 					</div>
 				</body>
 			</html>
