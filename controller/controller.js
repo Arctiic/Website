@@ -67,12 +67,31 @@ module.exports = (app, io) => {
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
+					<script>
+					function typeWriter(text, n) {
+						if (n < (text.length)) {
+							$('#command').html(text.substring(0, n+1));
+							n++;
+							setTimeout(function() {
+								typeWriter(text, n)
+							}, 100);
+						}
+					}
+
+					function start () {
+
+						let text = $('#command').data('text');
+
+						typeWriter(text, 0);
+					}
+					</script>
+
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
 					<link rel="stylesheet" href="/cli/assets/css/main.css" />
 					<link rel="icon" href="/cli/assets/img/spy.png" />
 
 				</head>
-				<body onload="load()" class="portal">
+				<body onload="load(); setTimeout(1000, start())" class="portal">
 					<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
 					}, 25)"></iframe>
@@ -96,7 +115,7 @@ module.exports = (app, io) => {
 					<div class="homebrew">
 					<h1 style="font-size:30px; color:#000000;">.</h1>
 						<a href="/portal/${pageNum + 1}">
-							<span style="text-align:center; top:50px;" onclick="hide(); return false">>${command}</span>
+							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
 						</a>
 					</div>
 				</body>
