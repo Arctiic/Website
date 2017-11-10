@@ -79,7 +79,7 @@ module.exports = (app, io) => {
 					}
 
 					function start () {
-
+						let box = false;
 						let text = $('#command').data('text');
 
 						typeWriter(text, 0);
@@ -91,7 +91,7 @@ module.exports = (app, io) => {
 					<link rel="icon" href="/cli/assets/img/spy.png" />
 
 				</head>
-				<body onload="load(); setTimeout(1000, start())" class="portal">
+				<body onload="load(); start();" class="portal">
 					<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
 					}, 25)"></iframe>
@@ -113,9 +113,9 @@ module.exports = (app, io) => {
 						<span class="title" style="text-align: center;">Terminal - $bash</span>
 					</div>
 					<div class="homebrew">
-					<h1 style="font-size:30px; color:#000000;">.</h1>
+					<h1 style="font-size:20px; color:#000000;">.</h1>
 						<a href="/portal/${pageNum + 1}">
-							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
+							<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}▌">></span>
 						</a>
 					</div>
 				</body>
