@@ -19,7 +19,6 @@
 		"mysql": "^2.15.0",
 		"nodemon": "^1.12.1",
 		"socket.io": "^2.0.3",
-		"stringtables": "^1.0.1",
-		"terminal-kit": "^1.13.13"
+		"stringtables": "^1.0.1"
 	}
 }
