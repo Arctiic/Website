@@ -131,12 +131,12 @@ module.exports = (app, io) => {
 								}
 								fs = !fs;
 							"></div>
-							<span class="title" style="text-align: center; font-size: 15px; margin: 0px 2">Terminal - $bash</span>
+							<span style="text-align: center; font-size: 15px; margin: 0px 0px 2px 0px">Terminal - $bash</span>
 						</div>
 						<div class="homebrew" id="homebrew">
 						<h1 style="font-size:30px; color:#000000;">.</h1>
 							<a href="/portal/${pageNum + 1}">
-								<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
+								<span id="command" style="text-align: center; top: 50px;" onclick="hide(); return false" data-text=">${command}">></span>
 							</a>
 						</div>
 					</div>
