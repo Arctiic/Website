@@ -70,33 +70,33 @@ module.exports = (app, io) => {
 					<script>
 					let fs = false;
 					function typeWriter(text, n) {
-						if (n < (text.length)) {
+						if (n < text.length) {
 							$('#command').html(text.substring(0, n+1) + '▌');
 							n++;
 							setTimeout(function() {
 								typeWriter(text, n)
 							}, 200);
-						} else
-						blink();
+						} else {
+							blink();
+						}
 					}
 
 					function start () {
 						let box = false;
 						let text = $('#command').data('text');
 
-						function blink () {
-							let text = $('#command').data('text');
-							setTimeout(function() {
-								$('#command').html(text);
-								setTimeout(function() {
-									$('#command').html(text + '▌');
-									blink
-								},4000);
-							},2000);
-
-						}
-
 						typeWriter(text, 0);
+					}
+
+					function blink () {
+						let text = $('#command').data('text');
+						setTimeout(() => {
+							$('#command').html(text);
+							setTimeout(() => {
+								$('#command').html(text + '▌');
+								blink();
+							}, 1000);
+						}, 1000);
 					}
 					</script>
 
@@ -109,7 +109,7 @@ module.exports = (app, io) => {
 					$('#app-bar').css('width', '500px');
 					$('#homebrew').css('width', '500px');
 					$('#app-bar').css('height', '20px');
-					$('#homebrew').css('height', '100px');
+					$('#homebrew').css('height', '150px');
 				" class="portal">
 					<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
 						document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
@@ -134,7 +134,7 @@ module.exports = (app, io) => {
 								if (fs) {
 									$('#app-bar').css('width', '500px');
 									$('#homebrew').css('width', '500px');
-									$('#homebrew').css('height', '100px');
+									$('#homebrew').css('height', '150px');
 									$('#info').show();
 								} else {
 									$('#app-bar').css('width', $(window).width() + 'px');
