@@ -115,9 +115,13 @@ module.exports = (app, io) => {
 					</div>
 					<div id="terminal">
 						<div class="app-bar" id="app-bar">
-							<div  id="close"style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'"></div>
-							<div id="minimize" style="background-color: #fdbe42;" class="icon" onclick="$('#terminal').hide();"></div>
-							<div id="fullscreen" style="background-color: #35c649;" class="icon" onclick="
+							<div style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'">
+								<div class="text"><stong>x</strong></div>
+							</div>
+							<div style="background-color: #fdbe42;" class="icon text" onclick="$('#terminal').hide();">
+								<div class="text"><strong>_</strong></div>
+							</div>
+							<div style="background-color: #35c649;" class="icon text" onclick="
 								if (fs) {
 									$('#app-bar').css('width', '500px');
 									$('#homebrew').css('width', '500px');
@@ -130,7 +134,9 @@ module.exports = (app, io) => {
 									$('#info').hide();
 								}
 								fs = !fs;
-							"></div>
+							">
+								<div class="text"><strong>+</strong></div>
+							</div>
 							<span style="text-align: center; font-size: 15px; margin: 0px 0px 2px 0px">Terminal - $bash</span>
 						</div>
 						<div class="homebrew" id="homebrew">
