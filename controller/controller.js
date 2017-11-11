@@ -47,7 +47,7 @@ module.exports = (app, io) => {
 			"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!"
 		};
 		let jsonNext = {
-		 	"title": ""
+		 	"title": "Unfinished"
 		}
 		try {
 			json = require(`../cli/assets/portal/${pageNum}.json`);
@@ -76,12 +76,25 @@ module.exports = (app, io) => {
 							setTimeout(function() {
 								typeWriter(text, n)
 							}, 200);
-						}
+						} else
+						blink();
 					}
 
 					function start () {
 						let box = false;
 						let text = $('#command').data('text');
+
+						function blink () {
+							let text = $('#command').data('text');
+							setTimeout(function() {
+								$('#command').html(text);
+								setTimeout(function() {
+									$('#command').html(text + '▌');
+									blink
+								},4000);
+							},2000);
+
+						}
 
 						typeWriter(text, 0);
 					}
@@ -115,13 +128,9 @@ module.exports = (app, io) => {
 					</div>
 					<div id="terminal">
 						<div class="app-bar" id="app-bar">
-							<div style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'">
-								<div class="text"><stong>x</strong></div>
-							</div>
-							<div style="background-color: #fdbe42;" class="icon text" onclick="$('#terminal').hide();">
-								<div class="text"><strong>_</strong></div>
-							</div>
-							<div style="background-color: #35c649;" class="icon text" onclick="
+							<div  id="close"style="background-color: #ff0000;" class="icon" onclick="window.location.href='about:blank'"></div>
+							<div id="minimize" style="background-color: #fdbe42;" class="icon" onclick="$('#terminal').hide();"></div>
+							<div id="fullscreen" style="background-color: #35c649;" class="icon" onclick="
 								if (fs) {
 									$('#app-bar').css('width', '500px');
 									$('#homebrew').css('width', '500px');
@@ -134,15 +143,13 @@ module.exports = (app, io) => {
 									$('#info').hide();
 								}
 								fs = !fs;
-							">
-								<div class="text"><strong>+</strong></div>
-							</div>
-							<span style="text-align: center; font-size: 15px; margin: 0px 0px 2px 0px">Terminal - $bash</span>
+							"></div>
+							<span class="title" style="text-align: center; font-size: 15px; margin: 0px 2px">Terminal - $bash</span>
 						</div>
 						<div class="homebrew" id="homebrew">
 						<h1 style="font-size:30px; color:#000000;">.</h1>
 							<a href="/portal/${pageNum + 1}">
-								<span id="command" style="text-align: center; top: 50px;" onclick="hide(); return false" data-text=">${command}">></span>
+								<span id="command" style="text-align:center; top:50px;" onclick="hide(); return false" data-text=">${command}">></span>
 							</a>
 						</div>
 					</div>
