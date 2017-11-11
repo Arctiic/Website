@@ -47,7 +47,7 @@ module.exports = (app, io) => {
 			"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!"
 		};
 		let jsonNext = {
-		 	"title": "Unfinished"
+		 	"title": ""
 		}
 		try {
 			json = require(`../cli/assets/portal/${pageNum}.json`);
