@@ -23,6 +23,12 @@ module.exports = (app, io) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/hub.html`));
 	});
 
+	//Tools page
+	app.get('/err/:id', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/html/tools.html`));
+	})
+
+
 	//Apps
 	app.get('/a/:app', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/apps/${req.params.app}/main.html`));
