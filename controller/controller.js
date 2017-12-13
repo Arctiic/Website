@@ -35,6 +35,11 @@ module.exports = (app, io) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/apps/${req.params.app}/main.html`));
 	});
 
+	//Tools
+	app.get('/t/:tool', (req, res) => {
+		res.sendFile(path.resolve(`${__dirname}/../cli/tools/${req.params.tool}/main.html`));
+	});
+
 	//Manual Testing
 	app.get('/err/:id', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/errors/${req.params.id || "404"}.html`));

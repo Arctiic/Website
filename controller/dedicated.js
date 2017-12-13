@@ -5,7 +5,9 @@ const st = require('stringtables');
 module.exports = (app, io, t) => {
 	// Dedicated JS
 	{
-		
+		app.get('/t/encoder', (req, res) => {
+			res.sendFile(path.resolve(`${__dirname}/../cli/tools/encoder/main.html`));
+		});
 	}
 
 	// Dedicated html
