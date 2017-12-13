@@ -2,11 +2,32 @@ const path = require('path');
 const log = require('logtools');
 const st = require('stringtables');
 
+class Encoder {
+
+	encode () {
+
+	}
+
+	decode () {
+
+	}
+
+	_complicate () {
+		//Do multiplication stuff here
+	}
+}
+
 module.exports = (app, io, t) => {
 	// Dedicated JS
 	{
 		app.get('/t/encoder', (req, res) => {
-			res.sendFile(path.resolve(`${__dirname}/../cli/tools/encoder/main.html`));
+
+			let encoder = new Encoder();
+
+			res.set('Content-Type', 'text/html');
+			res.send(new Buffer(`
+
+			`));
 		});
 	}
 

@@ -25,10 +25,9 @@ module.exports = (app, io) => {
 	});
 
 	//Tools page
-	app.get('/err/:id', (req, res) => {
+	app.get('/t', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/tools.html`));
-	})
-
+	});
 
 	//Apps
 	app.get('/a/:app', (req, res) => {
@@ -37,7 +36,9 @@ module.exports = (app, io) => {
 
 	//Tools
 	app.get('/t/:tool', (req, res) => {
-		res.sendFile(path.resolve(`${__dirname}/../cli/tools/${req.params.tool}/main.html`));
+		if (req.params.tool != 'encoder') {
+			res.sendFile(path.resolve(`${__dirname}/../cli/tools/${req.params.tool}/main.html`));
+		}
 	});
 
 	//Manual Testing

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html class="home">
+	<head>
+		<title>Spy's Website</title>
+
+		<script src="/cli/assets/js/main.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/cli/assets/css/main.css" />
+		<link rel="icon" href="/cli/assets/img/spy.png" />
+
+	</head>
+	<body onload="load()">
+		<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
+			document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
+		}, 25)"></iframe>
+		<h1>Tools</h1>
+		<ul>
+			<li><a href="/t/encoder">Encoder</a></li>
+		</ul>
+	</body>
+</html>
