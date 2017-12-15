@@ -7,6 +7,7 @@ const log = require('logtools');
 const path = require('path');
 const config = require('./config.json');
 const st = require('stringtables');
+const bodyParser = require('body-parser');
 
 const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ");
 const controllers = [
@@ -16,6 +17,8 @@ const controllers = [
 ];
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.enable('case sensitive routing');
 app.enable('trust proxy');
