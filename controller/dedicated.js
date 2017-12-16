@@ -15,7 +15,7 @@ const _int = {
 			return n;
 		},
 	mod : (n, m) => {
-			if (int.div(n, m).includes(".")) {
+			if (int.mul(int.div(n, m), m) != n) {
 				return "1";
 			}
 			return "0";
@@ -25,6 +25,7 @@ const _int = {
 			for (let i = 0; i < exp; i++) {
 				r = int.mul(r, n);
 			}
+			return r;
 		}
 };
 
@@ -636,6 +637,7 @@ class Encoder {
 				}
 			}
 
+			console.log(r);
 			r = int.mul(r, key);
 			console.log(r);
 			r = this._complicate(r);
@@ -645,7 +647,7 @@ class Encoder {
 			r = this._buffer(r);
 			console.log(r);
 			r = this._binToText(r);
-			console.log(r);
+			console.log(r + " (" + r.length + ")");
 
 			return r;
 		}
@@ -660,20 +662,28 @@ class Encoder {
 			let r = "";
 			let m = message;
 
-			m = this._textToBin(r);
-			m = this._unbuffer(r);
-			m = this._binToNum(r);
-			m = this._decomplicate(r);
-			m = div(r, key);
+			console.log(m + " (" + m.length + ")");
+			m = this._textToBin(m);
+			console.log(m);
+			m = this._unbuffer(m);
+			console.log(m)
+			m = this._binToNum(m);
+			console.log(m);
+			m = this._decomplicate(m);
+			console.log(m);
+			m = int.div(m, key);
+			m = m.substring(1);
+			console.log(m);
 
 			for (let i = 0; i < m.length; i += 2) {
-				let char = getCharFromId(m.charAt(i));
+				let char = getCharFromId(m.charAt(i) + m.charAt(i + 1));
+				console.log(char);
 				if (char != null) {
 					r += char;
 				}
 			}
 
-			return r.substr(1);
+			return r;
 		}
 
 		/**
@@ -688,7 +698,7 @@ class Encoder {
 				lastTwo = '' + n.charAt(n.length - 2) + n.charAt(n.length - 1);
 
 			r = int.mul(r, firstTwo);
-			r += firstTwo;
+			r = firstTwo + r;
 			r = int.mul(r, lastTwo);
 			r += lastTwo;
 
@@ -703,24 +713,24 @@ class Encoder {
 		_decomplicate (n) {
 			let
 				r = n,
-				lastTwo = '' + n.charAt[n.length - 2] + n.charAt[n.length - 1],
-				split = '' + n.slice(0, n.length - 1);
+				lastTwo = '' + r.substring(n.length - 2, n.length - 1),
+				split = '' + r.slice(0, n.length - 2);
 
-			r = int.div(r, split);
+			r = int.div(split, lastTwo);
 
-			lastTwo = '' + n.charAt[n.length - 2] + n.charAt[n.length - 1];
-			split = '' + n.slice(0, n.length - 1);
+			let firstTwo = '' + r.substring(0, 1);
+			split = '' + r.slice(2);
 
-			r = int.div(r, split);
+			r = int.div(split, firstTwo);
 
-			return r;
+			return int.div(r, "100");
 		}
 
 		_buffer (n) {
 			let r = n;
 			r += "1"
 			while (true) {
-				if (_int.mod(r.length, "8") == "0") {
+				if (_int.mod("" + r.length, "8") == "0") {
 					return r;
 				}
 				r += "0";
@@ -742,38 +752,41 @@ class Encoder {
 			let tmp = n;
 			let r = "";
 			while (true) {
-				if (int.mul(int.div(tmp, "2"), "2") != tmp) {
-					r += "1";
-				} else {
-					r += "0"
-				}
 				if (tmp == "0") {
 					break;
 				}
+				if (int.mul(int.div(tmp, "2"), "2") != tmp) {
+					r += "1";
+				} else {
+					r += "0";
+				}
 				tmp = int.div(tmp, "2");
 			}
-			r = r.split()
-			r = r.reverse()
-			r = r.join();
+			return r.split('').reverse().join('');
 		}
 
 		_binToNum (b) {
-			let arr = b.split().reverse();
-			let r = 0;
-			for (let i = 0; i < arr.length; i++) {
-				let digit = arr[i];
-				r = int.add(int.mul(_int.exp("2", i), digit), r);
-			}
+			return parseInt(b, 2).toString(10);
 		}
 
 		_textToBin (t) {
-	    return t.replace(/[\s\S]/g, function(t) {
-	        return "00000000".slice(String(t.charCodeAt().toString(2)).length) + t.charCodeAt().toString(2);
-	    });
+			let r = '';
+			for (let i = 0; i < t.length; i++) {
+				let tmp = t.charCodeAt(i).toString(2);
+				for (let j = 0; (tmp.length % 8) != 0; j++) {
+					tmp = "0" + tmp;
+				}
+				r += tmp;
+			}
+			return r;
 		}
 
 		_binToText(b) {
-			return String.fromCharCode(parseInt(b, 2));
+			let r = '';
+			for (let i = 0; i < b.length; i += 8) {
+				r += String.fromCharCode(parseInt(b.substring(i, i + 8), 2));
+			}
+			return r;
 		}
 	}
 
@@ -794,11 +807,13 @@ module.exports = (app, io, t) => {
 			if (method == "ENCODE") r = encoder.encode(message, key);
 			if (method == "DECODE")	r = encoder.decode(message, key);
 
-			console.log(r);
+			r = encoder.decode(r, key);
+
 			resultArr.push(r);
 
-			res.set('Content-Type', 'text/html');
-			res.send(new Buffer(`<!DOCTYPE html><html><body onload="window.location.href='/t/encoder/${resultArr.length - 1}';"></body></html>`));
+			res.send(JSON.stringify({
+        id: resultArr.length - 1
+      }));
 		});
 
 		app.get('/t/encoder/:id', (req, res) => {
@@ -926,15 +941,13 @@ module.exports = (app, io, t) => {
 									message: msg,
 									key:  key,
 								}));
-
 								xhr.addEventListener("readystatechange", processRequest, false);
 							}
 
 							function processRequest(e) {
-								if (xhr.readyState == 4 && xhr.status == 200) {
-        					let response = JSON.parse(xhr.responseText);
-									alert (response.message);
-    						}
+							  if (xhr.readyState == 4 && xhr.status == 200) {
+							    window.location.href='/t/encoder/' + JSON.parse(xhr.responseText).id;
+							  }
 							}
 						</script>
 
