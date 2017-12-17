@@ -647,7 +647,6 @@ class Encoder {
 			r = this._buffer(r);
 			console.log(r);
 			r = this._binToText(r);
-			console.log(r + " (" + r.length + ")");
 
 			return r;
 		}
@@ -662,16 +661,17 @@ class Encoder {
 			let r = "";
 			let m = message;
 
-			console.log(m + " (" + m.length + ")");
+			console.log(m);
 			m = this._textToBin(m);
 			console.log(m);
 			m = this._unbuffer(m);
-			console.log(m)
+			console.log(m);
 			m = this._binToNum(m);
 			console.log(m);
 			m = this._decomplicate(m);
 			console.log(m);
 			m = int.div(m, key);
+			console.log(m);
 			m = m.substring(1);
 			console.log(m);
 
@@ -692,13 +692,14 @@ class Encoder {
 		 * @return {String}   The complicated number
 		 */
 		_complicate (n) {
-			let
-				r = n,
-				firstTwo = '' + n.charAt(0) + n.charAt(1),
-				lastTwo = '' + n.charAt(n.length - 2) + n.charAt(n.length - 1);
+			let r = n;
+			let firstTwo = r.substring(0, 2);
 
 			r = int.mul(r, firstTwo);
 			r = firstTwo + r;
+
+			let lastTwo = r.slice(-2);
+
 			r = int.mul(r, lastTwo);
 			r += lastTwo;
 
@@ -713,17 +714,17 @@ class Encoder {
 		_decomplicate (n) {
 			let
 				r = n,
-				lastTwo = '' + r.substring(n.length - 2, n.length - 1),
-				split = '' + r.slice(0, n.length - 2);
+				lastTwo = r.slice(-2),
+				split = r.slice(0, -2);
 
 			r = int.div(split, lastTwo);
 
-			let firstTwo = '' + r.substring(0, 1);
+			let firstTwo = '' + r.substring(0, 2);
 			split = '' + r.slice(2);
 
 			r = int.div(split, firstTwo);
 
-			return int.div(r, "100");
+			return r;
 		}
 
 		_buffer (n) {
@@ -749,20 +750,8 @@ class Encoder {
 		}
 
 		_numToBin (n) {
-			let tmp = n;
-			let r = "";
-			while (true) {
-				if (tmp == "0") {
-					break;
-				}
-				if (int.mul(int.div(tmp, "2"), "2") != tmp) {
-					r += "1";
-				} else {
-					r += "0";
-				}
-				tmp = int.div(tmp, "2");
-			}
-			return r.split('').reverse().join('');
+			return parseInt(n,10).toString(2);
+
 		}
 
 		_binToNum (b) {
@@ -786,8 +775,8 @@ class Encoder {
 			for (let i = 0; i < b.length; i += 8) {
 				r += String.fromCharCode(parseInt(b.substring(i, i + 8), 2));
 			}
-			return r;
-		}
+				return r;
+			}
 	}
 
 let resultArr = [];
@@ -806,8 +795,6 @@ module.exports = (app, io, t) => {
 
 			if (method == "ENCODE") r = encoder.encode(message, key);
 			if (method == "DECODE")	r = encoder.decode(message, key);
-
-			r = encoder.decode(r, key);
 
 			resultArr.push(r);
 
@@ -853,8 +840,9 @@ module.exports = (app, io, t) => {
 						}, 25)"></iframe>
 						<h1>Spy's Encoder/Decoder</h1>
 						<h2>Result:</h2>
-						<h3>${data}<h3>
-
+						<br>
+						<p>${data}<p>
+						<br>
 						<button onclick="window.location.href='/t/encoder'>Again!</button>
 					</body>
 				</html>
