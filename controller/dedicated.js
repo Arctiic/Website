@@ -733,7 +733,7 @@ class Encoder {
 	}
 
 	_binToNum(b) {
-		//
+		// BIN TO NUM HERE
 	}
 
 	_textToBin(t) {
