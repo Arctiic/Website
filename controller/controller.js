@@ -29,12 +29,12 @@ module.exports = (app, io) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/tools.html`));
 	});
 
-	//Apps
+	//Apps access
 	app.get('/a/:app', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/apps/${req.params.app}/main.html`));
 	});
 
-	//Tools
+	//Tools access
 	app.get('/t/:tool', (req, res) => {
 		if (req.params.tool != 'encoder') {
 			res.sendFile(path.resolve(`${__dirname}/../cli/tools/${req.params.tool}/main.html`));
