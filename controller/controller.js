@@ -14,7 +14,7 @@ module.exports = (app, io) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/code.html`));
 	});
 
-	//IP Page
+	//Get my IP Page
 	app.get('/ip', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/html/ip.html`));
 	});
