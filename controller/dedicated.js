@@ -4,32 +4,32 @@ const st = require('stringtables');
 const int = require('../modules/strint');
 
 const _int = {
-	floor : (n) => {
-			let r = n;
-			while (true) {
-				if (!r.includes('.')) {
-					break;
-				}
-				r = r.slice(0, -1);
+	floor: (n) => {
+		let r = n;
+		while (true) {
+			if (!r.includes('.')) {
+				break;
 			}
-			return n;
-		},
-	mod : (n, m) => {
-			if (int.mul(int.div(n, m), m) != n) {
-				return "1";
-			}
-			return "0";
-	},
-	exp : (n, exp) => {
-			let r = n;
-			for (let i = 0; i < exp; i++) {
-				r = int.mul(r, n);
-			}
-			return r;
+			r = r.slice(0, -1);
 		}
+		return n;
+	},
+	mod: (n, m) => {
+		if (int.mul(int.div(n, m), m) != n) {
+			return "1";
+		}
+		return "0";
+	},
+	exp: (n, exp) => {
+		let r = n;
+		for (let i = 0; i < exp; i++) {
+			r = int.mul(r, n);
+		}
+		return r;
+	}
 };
 
-function getCharFromId (id) {
+function getCharFromId(id) {
 	switch (id) {
 		case '00':
 			return '\uf8ff';
@@ -324,460 +324,462 @@ function getCharFromId (id) {
 			break;
 	};
 }
-function getIdFromChar (char) {
+
+function getIdFromChar(char) {
 	switch (char) {
-	case '\uf8ff':
-		return '00';
-		break;
-	case 'a':
-		return '01';
-		break;
-	case 'b':
-		return '02';
-		break;
-	case 'c':
-		return '03';
-		break;
-	case 'd':
-		return '04';
-		break;
-	case 'e':
-		return '05';
-		break;
-	case 'f':
-		return '06';
-		break;
-	case 'g':
-		return '07';
-		break;
-	case 'h':
-		return '08';
-		break;
-	case 'i':
-		return '09';
-		break;
-	case 'j':
-		return '10';
-		break;
-	case 'k':
-		return '11';
-		break;
-	case 'l':
-		return '12';
-		break;
-	case 'm':
-		return '13';
-		break;
-	case 'n':
-		return '14';
-		break;
-	case 'o':
-		return '15';
-		break;
-	case 'p':
-		return '16';
-		break;
-	case 'q':
-		return '17';
-		break;
-	case 'r':
-		return '18';
-		break;
-	case 's':
-		return '19';
-		break;
-	case 't':
-		return '20';
-		break;
-	case 'u':
-		return '21';
-		break;
-	case 'v':
-		return '22';
-		break;
-	case 'w':
-		return '23';
-		break;
-	case 'x':
-		return '24';
-		break;
-	case 'y':
-		return '25';
-		break;
-	case 'z':
-		return '26';
-		break;
-	case 'A':
-		return '3001';
-		break;
-	case 'B':
-		return '3002';
-		break;
-	case 'C':
-		return '3003';
-		break;
-	case 'D':
-		return '3004';
-		break;
-	case 'E':
-		return '3005';
-		break;
-	case 'F':
-		return '3006';
-		break;
-	case 'G':
-		return '3007';
-		break;
-	case 'H':
-		return '3008';
-		break;
-	case 'I':
-		return '3009';
-		break;
-	case 'J':
-		return '3010';
-		break;
-	case 'K':
-		return '3011';
-		break;
-	case 'L':
-		return '3012';
-		break;
-	case 'M':
-		return '3013';
-		break;
-	case 'N':
-		return '3014';
-		break;
-	case 'O':
-		return '3015';
-		break;
-	case 'P':
-		return '3016';
-		break;
-	case 'Q':
-		return '3017';
-		break;
-	case 'R':
-		return '3018';
-		break;
-	case 'S':
-		return '3019';
-		break;
-	case 'T':
-		return '3020';
-		break;
-	case 'U':
-		return '3021';
-		break;
-	case 'V':
-		return '3022';
-		break;
-	case 'W':
-		return '3023';
-		break;
-	case 'X':
-		return '3024';
-		break;
-	case 'Y':
-		return '3025';
-		break;
-	case 'Z':
-		return '3026';
-		break;
-	case ' ':
-		return '27';
-		break;
-	case '$$TAB':
-		return '28';
-		break;
-	case '$$ENTER':
-		return '29';
-		break;
-	case '$$SHIFT':
-		return '30';
-		break;
-	case '1':
-		return '31';
-		break;
-	case '2':
-		return '32';
-		break;
-	case '3':
-		return '33';
-		break;
-	case '4':
-		return '34';
-		break;
-	case '5':
-		return '35';
-		break;
-	case '6':
-		return '36';
-		break;
-	case '7':
-		return '37';
-		break;
-	case '8':
-		return '38';
-		break;
-	case '9':
-		return '39';
-		break;
-	case '0':
-		return '40';
-		break;
-	case '!':
-		return '41';
-		break;
-	case '@':
-		return '42';
-		break;
-	case '#':
-		return '43';
-		break;
-	case '$':
-		return '44';
-		break;
-	case '%':
-		return '45';
-		break;
-	case '^':
-		return '46';
-		break;
-	case '&':
-		return '47';
-		break;
-	case '*':
-		return '48';
-		break;
-	case '(':
-		return '49';
-		break;
-	case ')':
-		return '50';
-		break;
-	case '.':
-		return '51';
-		break;
-	case ',':
-		return '52';
-		break;
-	case '?':
-		return '53';
-		break;
-	case ':':
-		return '54';
-		break;
-	case ';':
-		return '55';
-		break;
-	case '\'':
-		return '56';
-		break;
-	case '"':
-		return '57';
-		break;
-	case '+':
-		return '58';
-		break;
-	case '=':
-		return '59';
-		break;
-	case '-':
-		return '60';
-		break;
-	case '_':
-		return '61';
-		break;
-	case '[':
-		return '62';
-		break;
-	case ']':
-		return '63';
-		break;
-	case '<':
-		return '64';
-		break;
-	case '>':
-		return '65';
-		break;
-	case '{':
-		return '66';
-		break;
-	case '}':
-		return '67';
-		break;
-	case '/':
-		return '68';
-		break;
-	case '\\':
-		return '69';
-		break;
-	case '|':
-		return '70';
-		break;
-};}
+		case '\uf8ff':
+			return '00';
+			break;
+		case 'a':
+			return '01';
+			break;
+		case 'b':
+			return '02';
+			break;
+		case 'c':
+			return '03';
+			break;
+		case 'd':
+			return '04';
+			break;
+		case 'e':
+			return '05';
+			break;
+		case 'f':
+			return '06';
+			break;
+		case 'g':
+			return '07';
+			break;
+		case 'h':
+			return '08';
+			break;
+		case 'i':
+			return '09';
+			break;
+		case 'j':
+			return '10';
+			break;
+		case 'k':
+			return '11';
+			break;
+		case 'l':
+			return '12';
+			break;
+		case 'm':
+			return '13';
+			break;
+		case 'n':
+			return '14';
+			break;
+		case 'o':
+			return '15';
+			break;
+		case 'p':
+			return '16';
+			break;
+		case 'q':
+			return '17';
+			break;
+		case 'r':
+			return '18';
+			break;
+		case 's':
+			return '19';
+			break;
+		case 't':
+			return '20';
+			break;
+		case 'u':
+			return '21';
+			break;
+		case 'v':
+			return '22';
+			break;
+		case 'w':
+			return '23';
+			break;
+		case 'x':
+			return '24';
+			break;
+		case 'y':
+			return '25';
+			break;
+		case 'z':
+			return '26';
+			break;
+		case 'A':
+			return '3001';
+			break;
+		case 'B':
+			return '3002';
+			break;
+		case 'C':
+			return '3003';
+			break;
+		case 'D':
+			return '3004';
+			break;
+		case 'E':
+			return '3005';
+			break;
+		case 'F':
+			return '3006';
+			break;
+		case 'G':
+			return '3007';
+			break;
+		case 'H':
+			return '3008';
+			break;
+		case 'I':
+			return '3009';
+			break;
+		case 'J':
+			return '3010';
+			break;
+		case 'K':
+			return '3011';
+			break;
+		case 'L':
+			return '3012';
+			break;
+		case 'M':
+			return '3013';
+			break;
+		case 'N':
+			return '3014';
+			break;
+		case 'O':
+			return '3015';
+			break;
+		case 'P':
+			return '3016';
+			break;
+		case 'Q':
+			return '3017';
+			break;
+		case 'R':
+			return '3018';
+			break;
+		case 'S':
+			return '3019';
+			break;
+		case 'T':
+			return '3020';
+			break;
+		case 'U':
+			return '3021';
+			break;
+		case 'V':
+			return '3022';
+			break;
+		case 'W':
+			return '3023';
+			break;
+		case 'X':
+			return '3024';
+			break;
+		case 'Y':
+			return '3025';
+			break;
+		case 'Z':
+			return '3026';
+			break;
+		case ' ':
+			return '27';
+			break;
+		case '$$TAB':
+			return '28';
+			break;
+		case '$$ENTER':
+			return '29';
+			break;
+		case '$$SHIFT':
+			return '30';
+			break;
+		case '1':
+			return '31';
+			break;
+		case '2':
+			return '32';
+			break;
+		case '3':
+			return '33';
+			break;
+		case '4':
+			return '34';
+			break;
+		case '5':
+			return '35';
+			break;
+		case '6':
+			return '36';
+			break;
+		case '7':
+			return '37';
+			break;
+		case '8':
+			return '38';
+			break;
+		case '9':
+			return '39';
+			break;
+		case '0':
+			return '40';
+			break;
+		case '!':
+			return '41';
+			break;
+		case '@':
+			return '42';
+			break;
+		case '#':
+			return '43';
+			break;
+		case '$':
+			return '44';
+			break;
+		case '%':
+			return '45';
+			break;
+		case '^':
+			return '46';
+			break;
+		case '&':
+			return '47';
+			break;
+		case '*':
+			return '48';
+			break;
+		case '(':
+			return '49';
+			break;
+		case ')':
+			return '50';
+			break;
+		case '.':
+			return '51';
+			break;
+		case ',':
+			return '52';
+			break;
+		case '?':
+			return '53';
+			break;
+		case ':':
+			return '54';
+			break;
+		case ';':
+			return '55';
+			break;
+		case '\'':
+			return '56';
+			break;
+		case '"':
+			return '57';
+			break;
+		case '+':
+			return '58';
+			break;
+		case '=':
+			return '59';
+			break;
+		case '-':
+			return '60';
+			break;
+		case '_':
+			return '61';
+			break;
+		case '[':
+			return '62';
+			break;
+		case ']':
+			return '63';
+			break;
+		case '<':
+			return '64';
+			break;
+		case '>':
+			return '65';
+			break;
+		case '{':
+			return '66';
+			break;
+		case '}':
+			return '67';
+			break;
+		case '/':
+			return '68';
+			break;
+		case '\\':
+			return '69';
+			break;
+		case '|':
+			return '70';
+			break;
+	};
+}
 
 class Encoder {
 
-		/**
-		 * Encode messages!
-		 * @param  {String} message The message to encode
-		 * @param  {String} key     The key to pass into the algorithm
-		 * @return {String}         The encoded message
-		 */
-		encode (message, key) {
-			let r = "1";
+	/**
+	 * Encode messages!
+	 * @param  {String} message The message to encode
+	 * @param  {String} key     The key to pass into the algorithm
+	 * @return {String}         The encoded message
+	 */
+	encode(message, key) {
+		let r = "1";
 
-			for (let i = 0; i < message.length; i++) {
-				let char = getIdFromChar(message.charAt(i));
-				if (char != null) {
-					r += char;
-				}
-			}
-
-			console.log(r);
-			r = int.mul(r, key);
-			console.log(r);
-			r = this._complicate(r);
-			console.log(r);
-			r = this._numToBin(r);
-			console.log(r);
-			r = this._buffer(r);
-			console.log(r);
-			r = this._binToText(r);
-
-			return r;
-		}
-
-		/**
-		 * Decode messages!
-		 * @param  {String} message The message to decode
-		 * @param  {String} key     The key to pass into the algorithm
-		 * @return {String}         The encoded message
-		 */
-		decode (message, key) {
-			let r = "";
-			let m = message;
-
-			console.log(m);
-			m = this._textToBin(m);
-			console.log(m);
-			m = this._unbuffer(m);
-			console.log(m);
-			m = this._binToNum(m);
-			console.log(m);
-			m = this._decomplicate(m);
-			console.log(m);
-			m = int.div(m, key);
-			console.log(m);
-			m = m.substring(1);
-			console.log(m);
-
-			for (let i = 0; i < m.length; i += 2) {
-				let char = getCharFromId(m.charAt(i) + m.charAt(i + 1));
-				console.log(char);
-				if (char != null) {
-					r += char;
-				}
-			}
-
-			return r;
-		}
-
-		/**
-		 * Complicate a message!
-		 * @param  {String} n The number to complicate
-		 * @return {String}   The complicated number
-		 */
-		_complicate (n) {
-			let r = n;
-			let firstTwo = r.substring(0, 2);
-
-			r = int.mul(r, firstTwo);
-			r = firstTwo + r;
-
-			let lastTwo = r.slice(-2);
-
-			r = int.mul(r, lastTwo);
-			r += lastTwo;
-
-			return r;
-		}
-
-		/**
-		 * Decomplicate a message!
-		 * @param  {String} n The number to decomplicate
-		 * @return {String}   The decomplicated number
-		 */
-		_decomplicate (n) {
-			let
-				r = n,
-				lastTwo = r.slice(-2),
-				split = r.slice(0, -2);
-
-			r = int.div(split, lastTwo);
-
-			let firstTwo = '' + r.substring(0, 2);
-			split = '' + r.slice(2);
-
-			r = int.div(split, firstTwo);
-
-			return r;
-		}
-
-		_buffer (n) {
-			let r = n;
-			r += "1"
-			while (true) {
-				if (_int.mod("" + r.length, "8") == "0") {
-					return r;
-				}
-				r += "0";
+		for (let i = 0; i < message.length; i++) {
+			let char = getIdFromChar(message.charAt(i));
+			if (char != null) {
+				r += char;
 			}
 		}
 
-		_unbuffer (n) {
-			let r = n;
-			while (true) {
-				if (r.slice(-1) == "1") {
-					r = r.slice(0, -1);
-					return r;
-				}
-				r = r.slice(0, -1);
+		console.log(r);
+		r = int.mul(r, key);
+		console.log(r);
+		r = this._complicate(r);
+		console.log(r);
+		r = this._numToBin(r);
+		console.log(r);
+		r = this._buffer(r);
+		console.log(r);
+		r = this._binToText(r);
+
+		return r;
+	}
+
+	/**
+	 * Decode messages!
+	 * @param  {String} message The message to decode
+	 * @param  {String} key     The key to pass into the algorithm
+	 * @return {String}         The encoded message
+	 */
+	decode(message, key) {
+		let r = "";
+		let m = message;
+
+		console.log(m);
+		m = this._textToBin(m);
+		console.log(m);
+		m = this._unbuffer(m);
+		console.log(m);
+		m = this._binToNum(m);
+		console.log(m);
+		m = this._decomplicate(m);
+		console.log(m);
+		m = int.div(m, key);
+		console.log(m);
+		m = m.substring(1);
+		console.log(m);
+
+		for (let i = 0; i < m.length; i += 2) {
+			let char = getCharFromId(m.charAt(i) + m.charAt(i + 1));
+			console.log(char);
+			if (char != null) {
+				r += char;
 			}
 		}
 
-		_numToBin (n) {
-			return parseInt(n,10).toString(2);
+		return r;
+	}
 
-		}
+	/**
+	 * Complicate a message!
+	 * @param  {String} n The number to complicate
+	 * @return {String}   The complicated number
+	 */
+	_complicate(n) {
+		let r = n;
+		let firstTwo = r.substring(0, 2);
 
-		_binToNum (b) {
-			return parseInt(b, 2).toString(10);
-		}
+		r = int.mul(r, firstTwo);
+		r = firstTwo + r;
 
-		_textToBin (t) {
-			let r = '';
-			for (let i = 0; i < t.length; i++) {
-				let tmp = t.charCodeAt(i).toString(2);
-				for (let j = 0; (tmp.length % 8) != 0; j++) {
-					tmp = "0" + tmp;
-				}
-				r += tmp;
-			}
-			return r;
-		}
+		let lastTwo = r.slice(-2);
 
-		_binToText(b) {
-			let r = '';
-			for (let i = 0; i < b.length; i += 8) {
-				r += String.fromCharCode(parseInt(b.substring(i, i + 8), 2));
-			}
+		r = int.mul(r, lastTwo);
+		r += lastTwo;
+
+		return r;
+	}
+
+	/**
+	 * Decomplicate a message!
+	 * @param  {String} n The number to decomplicate
+	 * @return {String}   The decomplicated number
+	 */
+	_decomplicate(n) {
+		let
+			r = n,
+			lastTwo = r.slice(-2),
+			split = r.slice(0, -2);
+
+		r = int.div(split, lastTwo);
+
+		let firstTwo = '' + r.substring(0, 2);
+		split = '' + r.slice(2);
+
+		r = int.div(split, firstTwo);
+
+		return r;
+	}
+
+	_buffer(n) {
+		let r = n;
+		r += "1"
+		while (true) {
+			if (_int.mod("" + r.length, "8") == "0") {
 				return r;
 			}
+			r += "0";
+		}
 	}
+
+	_unbuffer(n) {
+		let r = n;
+		while (true) {
+			if (r.slice(-1) == "1") {
+				r = r.slice(0, -1);
+				return r;
+			}
+			r = r.slice(0, -1);
+		}
+	}
+
+	_numToBin(n) {
+		return parseInt(n, 10).toString(2);
+	}
+
+	_binToNum(b) {
+		return parseInt(b, 2).toString(10);
+	}
+
+	_textToBin(t) {
+		let r = '';
+		for (let i = 0; i < t.length; i++) {
+			let tmp = t.charCodeAt(i).toString(2);
+			for (let j = 0;
+				(tmp.length % 8) != 0; j++) {
+				tmp = "0" + tmp;
+			}
+			r += tmp;
+		}
+		return r;
+	}
+
+	_binToText(b) {
+		let r = '';
+		for (let i = 0; i < b.length; i += 8) {
+			r += String.fromCharCode(parseInt(b.substring(i, i + 8), 2));
+		}
+		return r;
+	}
+}
 
 let resultArr = [];
 
@@ -793,14 +795,18 @@ module.exports = (app, io, t) => {
 
 			let r;
 
-			if (method == "ENCODE") r = encoder.encode(message, key);
-			if (method == "DECODE")	r = encoder.decode(message, key);
+			try {
+				if (method == "ENCODE") r = encoder.encode(message, key);
+				if (method == "DECODE") r = encoder.decode(message, key);
+			} catch (e) {
+				console.err(e);
+			}
 
 			resultArr.push(r);
 
 			res.send(JSON.stringify({
-        id: resultArr.length - 1
-      }));
+				id: resultArr.length - 1
+			}));
 		});
 
 		app.get('/t/encoder/:id', (req, res) => {
@@ -974,7 +980,7 @@ module.exports = (app, io, t) => {
 				"text": "Hey There! This page doesn't exist yet! Check for updates when we do upload!"
 			};
 			let jsonNext = {
-			 	"title": "Unfinished"
+				"title": "Unfinished"
 			}
 			try {
 				json = require(`../cli/assets/portal/${pageNum}.json`);

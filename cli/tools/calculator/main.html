@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Spy's Website</title>
+
+		<script src="/cli/assets/js/main.js"></script>
+		<script src="/cli/tools/calculator/main.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/cli/assets/css/main.css" />
+		<link rel="icon" href="/cli/assets/img/spy.png" />
+
+	</head>
+	<body onload="load()" class="calculator">
+		<iframe id="header" style="width: 100%; height: 60px; border: none;" src="/cli/html/header.html" scrolling="no" onload="setInterval(function () {
+			document.getElementById('header').style.height = document.getElementById('header').contentWindow.document.body.scrollHeight + 'px';
+		}, 25)"></iframe>
+		<h1>Calculator</h1>
+		<br />
+		<div style="width: 25%; height: 100%; float: left;">
+			<h6>Main input</h6>
+			<input id="input" type="text"/>
+			<br />
+			<br />
+			<h6>Secondary Input (GCF, GCD, LCM)</h6>
+			<input id="input2" type="text"/>
+			<br />
+			<h3>Result:</h3>
+			<p id="answer">None</p>
+			<br />
+			<div class="dropdown">
+				<button onclick="work('EQU')">Equals</button>
+				<div class="content">
+			    <a href="javascript:work('PRI');">Is Prime</a>
+			    <a href="javascript:work('FAC');">Factors</a>
+					<a href="javascript:work('PFA');">Prime Factors</a>
+			    <a href="javascript:work('PCM');">Prime Factorization</a>
+			  </div>
+			</div>
+			<br />
+			<br />
+			<div class="dropdown">
+				<button>2nd Input</button>
+				<div class="content">
+					<a href="javascript:work('GCF');">Greatest Common Factor</a>
+					<a href="javascript:work('GCD');">Greatest Common Denominator</a>
+					<a href="javascript:work('LCM');">Least Common Multiple</a>
+			  </div>
+			</div>
+		</div>
+		<div style="width: 75%; height: 100%; text-align: left; vertical-align: bottom; float: right;">
+			<h3>Usage</h3>
+			<br />
+			<h2>Overview</h2>
+			<p>
+				There are many things you can do with this calculator. <br />
+				There are many functions you can use, and you can put just about any JavaScript-compatible expression that resolves to a number.
+			</p>
+			<br />
+			<h2>Basic Arithmetic</h2>
+			<p>
+				+ is addition, - is subtraction, * is multiplication, / is division <br />
+				Examples: 1+2 results in 3, 5-2 results in 3, 2*3 results in 6, and 6/6 results in 1
+			</p>
+			<br />
+			<h2>Result Usage</h2>
+			<p>
+				If you hover over the Equals button, you will notice that there are more options than just '='. <br />
+				Each option will take the expression from the input and output their function. <br />
+				Example: 5 + 5 -> Is Prime will result in 'false', because 5 + 5 (10) is not prime
+			</p>
+			<br />
+			<h2>Variables</h2>
+			<p>
+				Support for Variables will be availible soon
+			</p>
+			<br />
+			<h2>Math Constants</h2>
+			<p>
+				There are some math constants like pi that can be accessed using Math.constant <br />
+				Example: Math.PI results in 3.14159...
+			</p>
+			<table width=100%>
+				<tr>
+					<td width=25%>
+						<ul>
+							<li>Math.E</li>
+							<li>Math.PI</li>
+							<li>Math.SQRT2</li>
+							<li>Math.SQRT1_2</li>
+							<li>Math.LN2</li>
+							<li>Math.LN10</li>
+							<li>Math.LOG2E</li>
+							<li>Math.LOG10E</li>
+						</ul>
+					</td>
+					<td width=75%>
+						<ul>
+							<li>Returns Euler's number</li>
+							<li>Returns PI</li>
+							<li>Returns the square root of 2</li>
+							<li>Returns the square root of 1/2</li>
+							<li>Returns the natural logarithm of 2</li>
+							<li>Returns the natural logarithm of 10</li>
+							<li>Returns base 2 logarithm of E</li>
+							<li>Returns base 10 logarithm of E </li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<h2>Math Functions</h2>
+			<p>
+				There are many math functions that can be applied to an expression, format is Math.function(parameter1, parameter2)
+				Example: Math.pow(2, 3) results in 2^3 which is 8.
+			</p>
+			<table width=100%>
+				<tr>
+					<td width=25%>
+						<ul>
+							<li>Math.abs(x)</li>
+							<li>Math.acos(x)</li>
+							<li>Math.asin(x)</li>
+							<li>Math.atan(x)</li>
+							<li>Math.atan2(y, x)</li>
+							<li>Math.ceil(x)</li>
+							<li>Math.cos(x)</li>
+							<li>Math.exp(x)</li>
+							<li>Math.floor(x)</li>
+							<li>Math.log(x)</li>
+							<li>Math.max(x, y, z, ..., n)</li>
+							<li>Math.min(x, y, z, ..., n)</li>
+							<li>Math.pow(x, y)</li>
+							<li>Math.random()</li>
+							<li>Math.round(x)</li>
+							<li>Math.sin(x)</li>
+							<li>Math.sqrt(x)</li>
+							<li>Math.tan(x)</li>
+						</ul>
+					</td>
+					<td width=75%>
+						<ul>
+							<li>Returns the absolute value of x</li>
+							<li>Returns the arccosine of x, in radians</li>
+							<li>Returns the arcsine of x, in radians</li>
+							<li>Returns the arctangent of x as a numeric value between -PI/2 and PI/2 radians</li>
+							<li>Returns the arctangent of the quotient of its arguments</li>
+							<li>Returns the value of x rounded up to its nearest integer</li>
+							<li>Returns the cosine of x (x is in radians)</li>
+							<li>Returns the value of E^x</li>
+							<li>Returns the value of x rounded down to its nearest integer</li>
+							<li>Returns the natural logarithm (base E) of x</li>
+							<li>Returns the number with the highest value</li>
+							<li>Returns the number with the lowest value</li>
+							<li>Returns the value of x to the power of y</li>
+							<li>Returns a random number between 0 and 1</li>
+							<li>Returns the value of x rounded to its nearest integer</li>
+							<li>Returns the sine of x (x is in radians)</li>
+							<li>Returns the square root of x</li>
+							<li>Returns the tangent of an angle</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
