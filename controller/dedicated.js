@@ -324,7 +324,6 @@ function getCharFromId(id) {
 			break;
 	};
 }
-
 function getIdFromChar(char) {
 	switch (char) {
 		case '\uf8ff':
@@ -623,12 +622,6 @@ function getIdFromChar(char) {
 
 class Encoder {
 
-	/**
-	 * Encode messages!
-	 * @param  {String} message The message to encode
-	 * @param  {String} key     The key to pass into the algorithm
-	 * @return {String}         The encoded message
-	 */
 	encode(message, key) {
 		let r = "1";
 
@@ -653,12 +646,6 @@ class Encoder {
 		return r;
 	}
 
-	/**
-	 * Decode messages!
-	 * @param  {String} message The message to decode
-	 * @param  {String} key     The key to pass into the algorithm
-	 * @return {String}         The encoded message
-	 */
 	decode(message, key) {
 		let r = "";
 		let m = message;
@@ -688,11 +675,6 @@ class Encoder {
 		return r;
 	}
 
-	/**
-	 * Complicate a message!
-	 * @param  {String} n The number to complicate
-	 * @return {String}   The complicated number
-	 */
 	_complicate(n) {
 		let r = n;
 		let firstTwo = r.substring(0, 2);
@@ -708,11 +690,6 @@ class Encoder {
 		return r;
 	}
 
-	/**
-	 * Decomplicate a message!
-	 * @param  {String} n The number to decomplicate
-	 * @return {String}   The decomplicated number
-	 */
 	_decomplicate(n) {
 		let
 			r = n,
@@ -752,11 +729,11 @@ class Encoder {
 	}
 
 	_numToBin(n) {
-		return parseInt(n, 10).toString(2);
+		// NUM TO BIN HERE
 	}
 
 	_binToNum(b) {
-		return parseInt(b, 2).toString(10);
+		//
 	}
 
 	_textToBin(t) {
