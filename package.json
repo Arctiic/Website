@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "git pull && cd cli/assets && lessc --clean-css=\"--s1 --advanced --compatibility=ie8\" less/main.less css/main.css && cd ../../ && nodemon --delay 5000ms",
-		"test": ""
+		"inst": "npm i"
 	},
 	"dependencies": {
 		"angular": "^1.6.8",
