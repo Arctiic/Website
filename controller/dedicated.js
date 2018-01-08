@@ -632,15 +632,10 @@ class Encoder {
 			}
 		}
 
-		console.log(r);
 		r = int.mul(r, key);
-		console.log(r);
 		r = this._complicate(r);
-		console.log(r);
 		r = this._numToBin(r);
-		console.log(r);
 		r = this._buffer(r);
-		console.log(r);
 		r = this._binToText(r);
 
 		return r;
@@ -650,23 +645,15 @@ class Encoder {
 		let r = "";
 		let m = message;
 
-		console.log(m);
 		m = this._textToBin(m);
-		console.log(m);
 		m = this._unbuffer(m);
-		console.log(m);
 		m = this._binToNum(m);
-		console.log(m);
 		m = this._decomplicate(m);
-		console.log(m);
 		m = int.div(m, key);
-		console.log(m);
 		m = m.substring(1);
-		console.log(m);
 
 		for (let i = 0; i < m.length; i += 2) {
 			let char = getCharFromId(m.charAt(i) + m.charAt(i + 1));
-			console.log(char);
 			if (char != null) {
 				r += char;
 			}
@@ -775,9 +762,7 @@ module.exports = (app, io, t) => {
 			try {
 				if (method == "ENCODE") r = encoder.encode(message, key);
 				if (method == "DECODE") r = encoder.decode(message, key);
-			} catch (e) {
-				console.err(e);
-			}
+			} catch (e) {}
 
 			resultArr.push(r);
 
