@@ -29,7 +29,7 @@ const _int = {
 	}
 };
 
-function getCharFromId(id) {
+function getCharFromId (id) {
 	switch (id) {
 		case '00':
 			return '\uf8ff';
@@ -324,7 +324,7 @@ function getCharFromId(id) {
 			break;
 	};
 }
-function getIdFromChar(char) {
+function getIdFromChar (char) {
 	switch (char) {
 		case '\uf8ff':
 			return '00';
@@ -623,6 +623,7 @@ function getIdFromChar(char) {
 class Encoder {
 
 	encode(message, key) {
+		let edm = this.method;
 		let r = "1";
 
 		for (let i = 0; i < message.length; i++) {
@@ -634,20 +635,35 @@ class Encoder {
 
 		r = int.mul(r, key);
 		r = this._complicate(r);
-		r = this._numToBin(r);
-		r = this._buffer(r);
-		r = this._binToText(r);
+
+		if (edm == 1) {
+			r = this._numToBin(r);
+			r = this._buffer(r);
+			r = this._binToText(r);
+		}
+
+		if (edm == 2) {
+			r = this._numToHex(r);
+		}
 
 		return r;
 	}
 
 	decode(message, key) {
+		let edm = this.method;
 		let r = "";
 		let m = message;
 
-		m = this._textToBin(m);
-		m = this._unbuffer(m);
-		m = this._binToNum(m);
+		if (edm == 1) {
+			m = this._textToBin(m);
+			m = this._unbuffer(m);
+			m = this._binToNum(m);
+		}
+
+		if (edm == 2) {
+			m = this._hexToNum(m);
+		}
+
 		m = this._decomplicate(m);
 		m = int.div(m, key);
 		m = m.substring(1);
@@ -660,6 +676,20 @@ class Encoder {
 		}
 
 		return r;
+	}
+
+	setMethod (method) {
+		let m;
+		switch (method) {
+			case 'BIN':
+				m = 1;
+				break;
+			case 'HEX':
+				m = 2;
+				break;
+		}
+
+		this.method = m;
 	}
 
 	_complicate(n) {
@@ -715,15 +745,23 @@ class Encoder {
 		}
 	}
 
-	_numToBin(n) {
+	_numToBin (n) {
 		// NUM TO BIN HERE
 	}
 
-	_binToNum(b) {
+	_binToNum (b) {
 		// BIN TO NUM HERE
 	}
 
-	_textToBin(t) {
+	_numToHex (n) {
+		return parseInt(n).toString(16).toUpperCase();
+	}
+
+	_hexToNum (h) {
+		return parseInt(h, 16);
+	}
+
+	_textToBin (t) {
 		let r = '';
 		for (let i = 0; i < t.length; i++) {
 			let tmp = t.charCodeAt(i).toString(2);
@@ -736,7 +774,7 @@ class Encoder {
 		return r;
 	}
 
-	_binToText(b) {
+	_binToText (b) {
 		let r = '';
 		for (let i = 0; i < b.length; i += 8) {
 			r += String.fromCharCode(parseInt(b.substring(i, i + 8), 2));
@@ -754,12 +792,15 @@ module.exports = (app, io, t) => {
 			let encoder = new Encoder();
 			let data = req.body;
 			let method = data.encodeMethod;
+			let edMethod = data.edMethod;
 			let message = data.message;
 			let key = data.key;
 
 			let r;
 
 			try {
+				encoder.setMethod(edMethod);
+
 				if (method == "ENCODE") r = encoder.encode(message, key);
 				if (method == "DECODE") r = encoder.decode(message, key);
 			} catch (e) {}
@@ -888,12 +929,13 @@ module.exports = (app, io, t) => {
 
 						<script>
 							var xhr;
-							function encode (method, msg, key) {
+							function encode (method, msg, key, edm) {
 								xhr = new XMLHttpRequest();
 								xhr.open('POST', '/http/encoder', true);
 								xhr.setRequestHeader("Content-Type", "application/json");
 								xhr.send(JSON.stringify({
 									encodeMethod: method,
+									edMethod: edm,
 									message: msg,
 									key:  key,
 								}));
@@ -919,9 +961,13 @@ module.exports = (app, io, t) => {
 				    <br><br>
 				    <h2>Message</h2>
 				    <textarea id="message" name="m" type="text"></textarea>
+						<br><br>
+				    <h2>Method</h2>
+						<p>Write either HEX or BIN. HEX is recommended</p>
+				    <textarea id="edm" name="edm" type="text"></textarea>
 				    <br><br>
-				    <button id="submit" onclick="encode('ENCODE', document.getElementById('message').value, document.getElementById('pass').value)">Encode</button>
-				    <button id="submit" onclick="encode('DECODE', document.getElementById('message').value, document.getElementById('pass').value)">Decode</button>
+				    <button id="submit" onclick="encode('ENCODE', document.getElementById('message').value, document.getElementById('pass').value, document.getElementById('edm').value)">Encode</button>
+				    <button id="submit" onclick="encode('DECODE', document.getElementById('message').value, document.getElementById('pass').value, document.getElementById('edm').value)">Decode</button>
 					</body>
 				</html>
 			`));
