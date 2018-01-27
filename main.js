@@ -22,6 +22,10 @@ const blacklist = new Enmap({
 	persistent: true
 });
 
+const SESSION_ID = generateID(2, 4);
+let whitelistCode;
+let blacklistCode;
+
 app.use('/cli', express.static(`${__dirname}/cli/`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -78,12 +82,16 @@ app.get('/redeem/:code', (req, res) => {
 	}
 });
 
-app.get('/grc/', (req, res) => {
+app.get('/grc/:sessionid', (req, res) => {
 	let s;
 	s += 'Whitelist: ' + whitelistCode + '\n';
 	s += 'UnBlacklist:' + blacklistCode + '\n';
 
-	res.send(s);
+	if (req.params.sessionid == SESSION_ID) {
+		res.send(s);
+	} else {
+		res.end();
+	}
 });
 
 for (let i = 0; i < controllers.length; i++) {
@@ -92,25 +100,26 @@ for (let i = 0; i < controllers.length; i++) {
 
 http.listen(config.port, () => {
     log.info(`Ready! http://${ip.address()}:${config.port}`);
+		console.log(`This session password: ${SESSION_ID}`);
 		console.log(t.newHeader());
 })
 
 checkPath = (path, ip) => {
-	let keywords = [];
+	let keywords = ['MYADMIN', 'HNAP1', 'SCRIPTS', 'PHPUNIT'];
 	if (checkIP() == 'NONE') {
 		for (let i = 0; i < keywords.length; i++) {
-			if (path.toUpperCase().includes(keywords[i]) {
+			if (path.toUpperCase().includes(keywords[i])) {
 				setBlacklist(ip, 'BLACKLIST');
 			}
 		}
 	}
-	if (path) {
-
-	}
 }
 
 checkIP = (ip) => {
-	return blacklist.get(ip) || 'NONE';
+	return blacklist.get(ip) || () => {
+		setBlacklist(ip, 'NONE');
+		return blacklist.get(ip);
+	};
 }
 
 setBlacklist = (ip, type) => {

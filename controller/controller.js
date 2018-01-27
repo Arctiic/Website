@@ -2,9 +2,6 @@ const path = require('path');
 const express = require('express');
 const log = require('logtools');
 
-let whitelistCode;
-let blacklistCode;
-
 module.exports = (app, io, t) => {
 
 	//Main Homepage
