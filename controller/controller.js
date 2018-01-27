@@ -2,7 +2,10 @@ const path = require('path');
 const express = require('express');
 const log = require('logtools');
 
-module.exports = (app, io) => {
+let whitelistCode;
+let blacklistCode;
+
+module.exports = (app, io, t) => {
 
 	//Main Homepage
 	app.get('/', (req, res) => {
@@ -45,5 +48,4 @@ module.exports = (app, io) => {
 	app.get('/err/:id', (req, res) => {
 		res.sendFile(path.resolve(`${__dirname}/../cli/errors/${req.params.id || "404"}.html`));
 	});
-
 }

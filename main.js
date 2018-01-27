@@ -8,13 +8,19 @@ const path = require('path');
 const config = require('./config.json');
 const st = require('stringtables');
 const bodyParser = require('body-parser');
+const Enmap = require("enmap");
 
-const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ");
+const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ", "   Whitelist   ");
 const controllers = [
 	'dedicated',
 	'controller',
 	'errors'
 ];
+
+const blacklist = new Enmap({
+	name: "blacklist",
+	persistent: true
+});
 
 app.use('/cli', express.static(`${__dirname}/cli/`));
 app.use(bodyParser.json());
@@ -37,14 +43,18 @@ app.all('*', (req, res, next) => {
 		req.headers['x-forwarded-port'] ||
 		req.connection.remotePort;
 
+	(!blacklist.get(ip)) ? setBlacklist(ip, 'NONE') : _();
+	checkPath(path, ip);
+
 	let line = t.newLine(
 		new st.Line(
 			`${method}`,
 			`${path}`,
 			`${status}`,
-			"0 ms",
+			"N/A",
 			`${ip}`,
-			`${port}`
+			`${port}`,
+			`${checkIP(ip)}`
 		)
 	);
 
@@ -52,11 +62,78 @@ app.all('*', (req, res, next) => {
 	next();
 });
 
+app.get('/redeem/:code', (req, res) => {
+	let redeem = req.params.code;
+	let ip =
+		req.headers['x-real-ip'] ||
+		req.connection.remoteAddress;
+
+	if (!whitelistCode || !blacklistCode) generateID();
+	if (redeem == whitelistCode) {
+		setBlacklist(ip, 'WHITELIST');
+		generateID();
+	} else if (redeem == blacklistCode && checkIP(ip) == 'BLACKLIST') {
+		setBlacklist(ip, 'NONE');
+		generateID();
+	}
+});
+
+app.get('/grc/', (req, res) => {
+	let s;
+	s += 'Whitelist: ' + whitelistCode + '\n';
+	s += 'UnBlacklist:' + blacklistCode + '\n';
+
+	res.send(s);
+});
+
 for (let i = 0; i < controllers.length; i++) {
-	require(`./controller/${controllers[i]}.js`)(app, io, t);
+	require(`./controller/${controllers[i]}.js`)(app, io);
 }
 
 http.listen(config.port, () => {
     log.info(`Ready! http://${ip.address()}:${config.port}`);
 		console.log(t.newHeader());
 })
+
+checkPath = (path, ip) => {
+	let keywords = [];
+	if (checkIP() == 'NONE') {
+		for (let i = 0; i < keywords.length; i++) {
+			if (path.toUpperCase().includes(keywords[i]) {
+				setBlacklist(ip, 'BLACKLIST');
+			}
+		}
+	}
+	if (path) {
+
+	}
+}
+
+checkIP = (ip) => {
+	return blacklist.get(ip) || 'NONE';
+}
+
+setBlacklist = (ip, type) => {
+	(type == "BLACKLIST") ? blacklist.set(ip, 'BLACKLIST') : _();
+	(type == "WHITELIST") ? blacklist.set(ip, 'WHITELIST') : _();
+	(type == "NONE") ? blacklist.set(ip, 'NONE') : _();
+}
+
+generateCode = () => {
+	whitelistCode = generateID(5, 4);
+	blacklistCode = generateID(5, 4);
+}
+
+generateID = (groups, groupsOf) => {
+	let r = '';
+	let digits = "0123456789ABCDEF";
+	for (let i = 0; i < groups; i++) {
+		for (let j = 0; j < groupsOf; j++) {
+			r += digits.charAt(Math.floor(Math.random() * digits.length));
+		}
+		r += '-';
+	}
+	return r.slice(0, -1);
+}
+
+_ = () => {}

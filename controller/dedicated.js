@@ -964,7 +964,7 @@ module.exports = (app, io, t) => {
 						<br><br>
 				    <h2>Method</h2>
 						<p>Write either HEX or BIN. HEX is recommended</p>
-				    <textarea id="edm" name="edm" type="text"></textarea>
+				    <textarea id="edm" name="edm" type="text" rows="1" style="height: 35px;"></textarea>
 				    <br><br>
 				    <button id="submit" onclick="encode('ENCODE', document.getElementById('message').value, document.getElementById('pass').value, document.getElementById('edm').value)">Encode</button>
 				    <button id="submit" onclick="encode('DECODE', document.getElementById('message').value, document.getElementById('pass').value, document.getElementById('edm').value)">Decode</button>
