@@ -116,7 +116,7 @@ checkPath = (path, ip) => {
 }
 
 checkIP = (ip) => {
-	return blacklist.get(ip) || () => {
+	return blacklist.get(ip) || function () {
 		setBlacklist(ip, 'NONE');
 		return blacklist.get(ip);
 	};
