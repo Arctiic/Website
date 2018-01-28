@@ -7,10 +7,12 @@ const log = require('logtools');
 const path = require('path');
 const config = require('./config.json');
 const st = require('stringtables');
+const uid = require('uid-gen');
 const bodyParser = require('body-parser');
 const Enmap = require("enmap");
 
 const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ", "   Whitelist   ");
+const idgen = new uid.IDGenerator();
 const controllers = [
 	'dedicated',
 	'controller',
@@ -22,7 +24,7 @@ const blacklist = new Enmap({
 	persistent: true
 });
 
-const SESSION_ID = generateID(2, 4);
+const SESSION_ID = idgen.simple(12);
 let whitelistCode;
 let blacklistCode;
 
@@ -129,20 +131,8 @@ setBlacklist = (ip, type) => {
 }
 
 generateCode = () => {
-	whitelistCode = generateID(5, 4);
-	blacklistCode = generateID(5, 4);
-}
-
-generateID = (groups, groupsOf) => {
-	let r = '';
-	let digits = "0123456789ABCDEF";
-	for (let i = 0; i < groups; i++) {
-		for (let j = 0; j < groupsOf; j++) {
-			r += digits.charAt(Math.floor(Math.random() * digits.length));
-		}
-		r += '-';
-	}
-	return r.slice(0, -1);
+	whitelistCode = idgen.id();
+	blacklistCode = idgen.id();
 }
 
 _ = () => {}
