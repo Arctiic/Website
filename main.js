@@ -1,3 +1,9 @@
+let e = console.error;
+console.error = (err) => {
+	if (err.toString().includes("Can't set headers")) return;
+	e(arg);
+}
+
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -143,11 +149,4 @@ checkIP = (ip) => {
 generateCode = () => {
 	whitelistCode = idgen.id();
 	blacklistCode = idgen.id();
-}
-
-
-let e = console.error;
-console.error = (arg) => {
-	if (e.toString().includes("Can't set headers")) return; 
-	e(arg);
 }
