@@ -27,6 +27,6 @@
 		"nodemon": "^1.14.7",
 		"socket.io": "^2.0.4",
 		"stringtables": "^1.0.1",
-		"uid-gen": "^1.0.0"
+		"uid-gen": "^1.1.1"
 	}
 }
