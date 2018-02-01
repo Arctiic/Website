@@ -148,6 +148,6 @@ generateCode = () => {
 
 let e = console.error;
 console.error = (arg) => {
-	if (e.toString.includes("Error: Can't set headers after they are sent.")) return; 
+	if (e.toString().includes("Error: Can't set headers after they are sent.")) return; 
 	e(arg);
 }
