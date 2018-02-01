@@ -101,6 +101,7 @@ for (let i = 0; i < controllers.length; i++) {
 }
 
 http.listen(config.port, () => {
+		generateCode();
     log.info(`Ready! http://${ip.address()}:${config.port}`);
 		console.log(`This session password: ${SESSION_ID}`);
 		console.log(t.newHeader());
