@@ -49,7 +49,6 @@ app.all('*', (req, res, next) => {
 		req.headers['x-forwarded-port'] ||
 		req.connection.remotePort;
 
-	(!blacklist.get(ip)) ? setBlacklist(ip, 'NONE') : _();
 	checkPath(path, ip);
 
 	let line = t.newLine(
