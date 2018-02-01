@@ -74,13 +74,18 @@ app.get('/redeem/:code', (req, res) => {
 		req.headers['x-real-ip'] ||
 		req.connection.remoteAddress;
 
-	if (!whitelistCode || !blacklistCode) generateID();
 	if (redeem == whitelistCode) {
 		setBlacklist(ip, 'WHITELIST');
-		generateID();
+		generateCode();
+
+		res.send("Sucess!");
 	} else if (redeem == blacklistCode && checkIP(ip) == 'BLACKLIST') {
 		setBlacklist(ip, 'NONE');
-		generateID();
+		generateCode();
+
+		res.send("Sucess!");
+	} else {
+		res.send("Failiure!");
 	}
 });
 
@@ -90,7 +95,7 @@ app.get('/grc/:sessionid', (req, res) => {
 	s += 'UnBlacklist:' + blacklistCode + '\n';
 
 	if (req.params.sessionid == SESSION_ID) {
-		res.send(s);
+		res.send('Whitelist: ' + whitelistCode + ' ' + 'UnBlacklist:' + blacklistCode);
 	} else {
 		res.end();
 	}
