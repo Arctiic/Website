@@ -75,12 +75,12 @@ app.get('/redeem/:code', (req, res) => {
 		req.connection.remoteAddress;
 
 	if (redeem == whitelistCode) {
-		setBlacklist(ip, 'WHITELIST');
+		blacklist.set(ip, 'WHITELIST');
 		generateCode();
 
 		res.send("Sucess!");
 	} else if (redeem == blacklistCode && checkIP(ip) == 'BLACKLIST') {
-		setBlacklist(ip, 'NONE');
+		blacklist.set(ip, 'NONE');
 		generateCode();
 
 		res.send("Sucess!");
@@ -117,24 +117,17 @@ checkPath = (path, ip) => {
 	if (checkIP() == 'NONE') {
 		for (let i = 0; i < keywords.length; i++) {
 			if (path.toUpperCase().includes(keywords[i])) {
-				setBlacklist(ip, 'BLACKLIST');
+				blacklist.set(ip, 'BLACKLIST');
 			}
 		}
 	}
 }
 
 checkIP = (ip) => {
-	console.log('.' + blacklist.get(ip) + '.');
 	return blacklist.get(ip) || function () {
-		setBlacklist(ip, 'NONE');
+		blacklist.set(ip, 'NONE');
 		return blacklist.get(ip);
 	};
-}
-
-setBlacklist = (ip, type) => {
-	(type == "BLACKLIST") ? blacklist.set(ip, 'BLACKLIST') : _();
-	(type == "WHITELIST") ? blacklist.set(ip, 'WHITELIST') : _();
-	(type == "NONE") ? blacklist.set(ip, 'NONE') : _();
 }
 
 generateCode = () => {
