@@ -89,6 +89,10 @@ app.get('/redeem/:code', (req, res) => {
 		generateCode();
 
 		res.send("Sucess!");
+	} else if (redeem == "XXXXXXXX" && checkIP(ip) == 'WHITELIST') {
+		blacklist.set(ip, 'NONE');
+
+		res.send("Sucess!");
 	} else {
 		res.send("Failiure!");
 	}
@@ -141,4 +145,9 @@ generateCode = () => {
 	blacklistCode = idgen.id();
 }
 
-_ = () => {}
+
+let e = console.error;
+console.error = (arg) => {
+	console.log(arg);
+	e(arg);
+}
