@@ -48,6 +48,12 @@ app.all('*', (req, res, next) => {
 	let port =
 		req.headers['x-forwarded-port'] ||
 		req.connection.remotePort;
+	let sd = '';
+
+	if (checkIP(ip) == 'BLACKLIST' && !path.includes('/redeem/')) {
+		res.end();
+		sd = ' - X';
+	}
 
 	checkPath(path, ip);
 
@@ -59,7 +65,7 @@ app.all('*', (req, res, next) => {
 			"N/A",
 			`${ip}`,
 			`${port}`,
-			`${checkIP(ip)}`
+			`${checkIP(ip)}${sd}`
 		)
 	);
 
