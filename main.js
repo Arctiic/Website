@@ -123,10 +123,11 @@ checkPath = (path, ip) => {
 }
 
 checkIP = (ip) => {
-	return blacklist.get(ip) || function () {
+	ipbl = blacklist.get(ip);
+	if (ipbl != 'NONE' && ipbl != 'BLACKLIST' && ipbl != 'WHITELIST') {
 		blacklist.set(ip, 'NONE');
-		return blacklist.get(ip);
-	};
+	}
+	return blacklist.get(ip);
 }
 
 generateCode = () => {
