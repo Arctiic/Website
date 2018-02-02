@@ -139,7 +139,7 @@ checkPath = (path, ip) => {
 }
 
 checkIP = (ip) => {
-	// All LAN Connections are whitelisted
+	console.log(typeof ip);
 	if (ip.includes("10.") || ip.includes("172.16.") || ip.includes("192.168.")) return 'WHITELIST';
 
 	ipbl = blacklist.get(ip);
