@@ -56,8 +56,6 @@ app.all('*', (req, res, next) => {
 		req.connection.remotePort;
 	let sd = '';
 
-	if (ip === undefined) return;
-
 	if (checkIP(ip) == 'BLACKLIST' && !path.includes('/redeem/')) {
 		res.end();
 		sd = ' - X';
@@ -141,6 +139,7 @@ checkPath = (path, ip) => {
 }
 
 checkIP = (ip) => {
+	if (!ip || ip === undefined) return 'NONE';
 	if (ip.includes("10.") || ip.includes("172.16.") || ip.includes("192.168.")) return 'WHITELIST';
 
 	ipbl = blacklist.get(ip);
