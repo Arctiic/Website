@@ -1,7 +1,7 @@
 let e = console.error;
 console.error = (err) => {
 	if (err.toString().includes("Can't set headers")) return;
-	e(arg);
+	e(err);
 }
 
 const express = require('express');
