@@ -16,6 +16,7 @@ const st = require('stringtables');
 const uid = require('uid-gen');
 const bodyParser = require('body-parser');
 const Enmap = require("enmap");
+const EnmapLevel = require("enmap-level");
 
 const t = new st.Table(" Type ", " Path                               ", " Status ", " Latency ", " IP                 ", " Port ", "   Whitelist   ");
 const idgen = new uid.IDGenerator();
@@ -25,12 +26,9 @@ const controllers = [
 	'errors'
 ];
 
-const blacklist = new Enmap({
-	name: "blacklist",
-	persistent: true
-});
+const blacklist = new Enmap({provider: new EnmapLevel({name: "blacklist"})});
 
-const SESSION_ID = idgen.simple(12);
+const SESSION_ID = new uid.IDGenerator({digits: "0123456789abcdefABCDEF"}).simple(8);
 let whitelistCode;
 let blacklistCode;
 
@@ -116,14 +114,29 @@ app.get('/grc/:sessionid', (req, res) => {
 	}
 });
 
+app.get('/shutdown/:sessionid', async (req, res) => {
+	if (!req.params.sessionid == SESSION_ID) return res.end();
+	console.log(t.newFooter());
+	log.warn("Shutting down...");
+
+	await blacklist.db.close;
+});
+
 for (let i = 0; i < controllers.length; i++) {
 	require(`./controller/${controllers[i]}.js`)(app, io);
 }
 
-http.listen(config.port, () => {
+http.listen(config.port, async () => {
+		log.info('Starting...');
+		log.info('Generating keys...');
 		generateCode();
+		log.info('Done!');
+		log.info('Loading blacklist...');
+		await blacklist.defer;
+		log.info('Done! Loaded in ' + blacklist.size + ' entries');
+
     log.info(`Ready! http://${ip.address()}:${config.port}`);
-		console.log(`This session password: ${SESSION_ID}`);
+		console.log(`Session generated password: ${SESSION_ID}`);
 		console.log(t.newHeader());
 })
 

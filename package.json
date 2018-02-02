@@ -7,7 +7,7 @@
 	"requires": "true",
 	"license": "MIT",
 	"scripts": {
-		"start": "git pull && cd cli/assets && lessc --clean-css=\"--s1 --advanced --compatibility=ie8\" less/main.less css/main.css && cd ../../ && nodemon --delay 5000ms",
+		"start": "git pull && cd cli/assets && lessc --clean-css=\"--s1 --advanced --compatibility=ie8\" less/main.less css/main.css && cd ../../ && clear && nodemon --delay 5000ms",
 		"inst": "npm i"
 	},
 	"dependencies": {
