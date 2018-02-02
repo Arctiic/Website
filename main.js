@@ -56,7 +56,7 @@ app.all('*', (req, res, next) => {
 		req.connection.remotePort;
 	let sd = '';
 
-	if (!ip) return;
+	if (ip === undefined) return;
 
 	if (checkIP(ip) == 'BLACKLIST' && !path.includes('/redeem/')) {
 		res.end();
