@@ -149,7 +149,7 @@ http.listen(config.port, async () => {
 })
 
 checkPath = (path, ip) => {
-	let keywords = ['MYADMIN', 'HNAP1', 'SCRIPTS', 'PHPUNIT', 'BIN', 'FTP', 'CONFIG', 'PASSWD'];
+	let keywords = ['MYADMIN', 'HNAP1', 'SCRIPTS', 'PHPUNIT', 'BIN', 'FTP', 'CONFIG', 'PASSWD', 'ROBOT'];
 	if (checkIP() == 'NONE') {
 		for (let i = 0; i < keywords.length; i++) {
 			if (path.toUpperCase().includes(keywords[i])) {
