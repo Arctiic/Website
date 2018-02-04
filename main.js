@@ -29,6 +29,9 @@ const controllers = [
 const blacklist = new Enmap({provider: new EnmapLevel({name: "blacklist"})});
 
 const SESSION_ID = new uid.IDGenerator({digits: "0123456789abcdefABCDEF"}).simple(8);
+
+let BLACKLIST_CONNECTIONS = 0;
+
 let whitelistCode;
 let blacklistCode;
 
@@ -56,7 +59,7 @@ app.all('*', (req, res, next) => {
 
 	if (checkIP(ip) == 'BLACKLIST' && !path.includes('/redeem/')) {
 		res.end();
-		sd = ' - X';
+		return BLACKLIST_CONNECTIONS++;
 	}
 
 	checkPath(path, ip);
@@ -115,11 +118,16 @@ app.get('/grc/:sessionid', (req, res) => {
 });
 
 app.get('/shutdown/:sessionid', async (req, res) => {
-	if (!req.params.sessionid == SESSION_ID) return res.end();
+	if (!req.params.sessionid == SESSION_ID) return res.send('Failiure!');
+	res.send('Sucess!');
 	console.log(t.newFooter());
-	log.warn("Shutting down...");
-
+	log.warn("Preparing shutdown...");
+	log.warn("Got " + BLACKLIST_CONNECTIONS + " blacklist connections");
+	log.info("Closing blacklist database");
 	await blacklist.db.close;
+	log.info("Done!");
+	log.warn("Shutting down!");
+	process.exit(0);
 });
 
 for (let i = 0; i < controllers.length; i++) {
@@ -131,7 +139,7 @@ http.listen(config.port, async () => {
 		log.info('Generating keys...');
 		generateCode();
 		log.info('Done!');
-		log.info('Loading blacklist...');
+		log.info('Loading blacklist database...');
 		await blacklist.defer;
 		log.info('Done! Loaded in ' + blacklist.size + ' entries');
 
@@ -141,7 +149,7 @@ http.listen(config.port, async () => {
 })
 
 checkPath = (path, ip) => {
-	let keywords = ['MYADMIN', 'HNAP1', 'SCRIPTS', 'PHPUNIT'];
+	let keywords = ['MYADMIN', 'HNAP1', 'SCRIPTS', 'PHPUNIT', 'BIN', 'FTP', 'CONFIG', 'PASSWD'];
 	if (checkIP() == 'NONE') {
 		for (let i = 0; i < keywords.length; i++) {
 			if (path.toUpperCase().includes(keywords[i])) {
